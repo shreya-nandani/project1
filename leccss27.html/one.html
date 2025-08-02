@@ -47,21 +47,84 @@
             text-align: center;
         }
         #amountBox{
-            width: 80%;
-            height: 10%;
+            position: absolute;
+            top:460px ;
+            width: 300px;
+            height: 6%;
             background-color:#1CB5E0;
             border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+            
         }
-        #paymentButton{
-            width: 80%;
-            height: 9%;
-            background-color: rgb(8, 8, 139) ;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0,0,19) , 0 6px 6px rgba(0, 0,0,23);
+        #leftBox{
+            height: 100%;
+            width: fit-content;
+            display: flex;
+            gap: 15px;
+
+            align-items: center;
+
 
         }
-        
+       
+        #paymentButton{
+            top: 525px;
+            position: absolute;
+            width: 300px;
+            height: 6%;
+            background-color: rgb(40, 40, 214) ;
+            color: white;
+            /* border-radius: 10px; */
+            box-shadow: 0 10px 20px rgba(0, 0,0,19) , 0 6px 6px rgba(0, 0,0,23);
+
+
+        }
+         .cancelBox {
+           margin-top: 190px; /* Pushes it to bottom */
+        }
+        .cancelBox a{
+           
+            text-decoration:none ;
+            color: rgb(47, 42, 42);
+            font-weight: bold;
+            font-size: large;
+
+        }
+         .imgBox img{
+            height: 2.5rem;
+            width: 2.5rem;
+
+         }
+         #qrPopup {
+          position: absolute;
+          top: 580px; /* Just below the button */
+          width: 200px;
+          height: 200px;
+         
+          padding: 10px;
+          border-radius: 10px; 
+          display: none;
+          justify-content: center;
+          align-items: center;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+          }
+
+          #qrPopup img {
+          width: 70%;
+          height: 70%;
+          object-fit: contain;
+        }
+         /* Show the QR popup on hover */
+           #paymentButton:hover + #qrPopup {
+            display: flex;
+            transition: all 5s linear 5s;
+          }
+
+
 
     </style>
 </head>
@@ -76,19 +139,44 @@
                     Order Summary
                  </h2>
                       <p>
-                        I understand that life can get busy, but I really need to get that back. 
-                        If you're able to pay me back soon, that would be great.
+                      This was about the amount you had to pay for the last purchase.
                       </p>
 
             </div>
 
            <div id="amountBox">
+                 <div id="leftBox">
+                    <div class="imgBox">
+                        <img
+                             src="WhatsApp Image 2025-07-30 at 20.37.52_f889b144.jpg" 
+                        />
+                    </div>
+                    <div id="txtAmtBox">
+                        <p>Amount</p>
+                        <p>$10.9</p>
+                    </div>
+
+
+                 </div>
+                 <div id="rightBox">
+                    <a href="#">Change</a>
+                 </div>
+
+                 
 
            </div>
            <button id="paymentButton">
             proceed to payment
-
            </button>
+           <div id="qrPopup">
+                      <img 
+                          src="WhatsApp Image 2025-08-01 at 20.54.24_9ff46cb0.jpg"
+                        />
+           </div>              
+
+          <div class="cancelBox">
+            <a href="#">Cancel Order</a>
+          </div>
            
 
 
