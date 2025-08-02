@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+            min-height: 900px;
+            background-color: #000851;
+            background-image: linear gradient(90deg, #1CB5E0 0%, #000851 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .card{
+            width: 400px;
+            height: 600px;
+            background-color: hotpink;
+            border-radius: 20px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card img{
+            width: 100%;
+            height: 30%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .txtBox{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 70%;
+            text-align: center;
+        }
+        #amountBox{
+            width: 80%;
+            height: 10%;
+            background-color:#1CB5E0;
+            border-radius: 10px;
+        }
+        #paymentButton{
+            width: 80%;
+            height: 9%;
+            background-color: rgb(8, 8, 139) ;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0,0,19) , 0 6px 6px rgba(0, 0,0,23);
+
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img 
+                src="googlepay.webp"
+            />
+            <div class="txtBox">
+                 <h2>
+                    Order Summary
+                 </h2>
+                      <p>
+                        I understand that life can get busy, but I really need to get that back. 
+                        If you're able to pay me back soon, that would be great.
+                      </p>
+
+            </div>
+
+           <div id="amountBox">
+
+           </div>
+           <button id="paymentButton">
+            proceed to payment
+
+           </button>
+           
+
+
+
+
+    </div>
+</body>
+</html>

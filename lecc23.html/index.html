@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation k gyan</title>
+    <style>
+        
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background-color: beige;
+            border: 5px solid black;
+            position: relative;
+            overflow: auto;
+        }
+        .box1 {
+            width: 350px;
+            height: 80px;
+            font-size: 50px;
+            background-color: blue;
+            border: 3px solid yellow;
+            border-radius: 10px;
+            margin: 10px;
+            position: relative;
+            animation: 5s linear 1s infinite alternate rightMovement;
+        }
+        @keyframes rightMovement {
+            from {
+                top: 0;
+                left: 0;
+            }
+            to {
+                top: 0;
+                left: 1000px;
+            }
+        }
+        #box2 {
+            width: 350px;
+            height: 80px;
+            font-size: 50px;
+            background-color: blue;
+            border: 3px solid yellow;
+            border-radius: 10px;
+            margin: 10px;
+            position: relative;
+            animation: 5s ease-in 1s infinite alternate leftmovement;
+        }
+        @keyframes leftmovement {
+            from {
+                top: 600px;
+                left: 1350px;
+            }
+            to {
+                top: 600px;
+                left: 1000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1"></div>
+        <div id="box2"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .root{--primary-color:brown;
+            --custom-width:330px;}
+        .container{
+            background-color: beige;
+            height: 650px;
+            border:2px solid black;
+            display:flex;
+            justify-content: center ;
+            align-items: center;
+        }
+        .box{
+            --primary-color:brown;
+            --custom-width:330px;
+            background-color: aquamarine;
+            width: var(--custom-width);
+            height: 480px;
+            border: 1px solid brown ;
+            margin: 5px;
+            padding: 5px;
+            /* box-shadow: -20px 17px brown; */
+            /* box-shadow: 10px 10px 10px 14px rgba(0, 0,0, 1); */
+
+        }
+        #head1{
+            
+           /* text-shadow: 2px 3px 2px white;  */
+           /*text-shadow: yellow 12px 13px 3px;*/
+            text-shadow:white 20px 23px; 
+           
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <img src="soalogo.jpeg" >
+            <h2 id="head1"> Welcome to SOAportal</h2>
+            <p>
+The acronym SOA can stand for Service-Oriented Architecture or Statement of Account, depending on the context. Service-oriented architecture (SOA) is a software design approach where applications are built from reusable, self-contained services. A statement of account (SOA) is a financial document summarizing transactions between a business and a customer. 
+</p>
+    </div>
+</body>
+</html>
