@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment</title>
+    <link rel="stylesheet" href="">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .specialty-button {
+            transition: all 0.3s ease;
+        }
+        .specialty-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center py-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">Find a Specialist</h1>
+            <p class="text-lg text-gray-600">Explore our list of specialties and book your appointment with ease.</p>
+        </header>
+
+        <!-- Specialties Section -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Specialities</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Cardiology -->
+                <button class="specialty-button w-full flex flex-col items-center p-4 bg-red-100 rounded-xl hover:bg-red-200" data-specialty="Cardiology">
+                    <svg class="h-16 w-16 text-red-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.89 0-2.79 1.45-3.84 3.29c-1.05-1.84-1.95-3.29-3.84-3.29A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-800">Cardiology</span>
+                </button>
+                <!-- Nephrology -->
+                <button class="specialty-button w-full flex flex-col items-center p-4 bg-blue-100 rounded-xl hover:bg-blue-200" data-specialty="Nephrology">
+                    <svg class="h-16 w-16 text-blue-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 13a6 6 0 0 1-6 6H6" />
+                        <path d="M20 9a6 6 0 0 1-6-6H6" />
+                        <path d="M22 6c-3 0-5.5 1.5-7.5 4.5" />
+                        <path d="M15.5 10.5C13.5 13.5 11 15 8 15" />
+                        <path d="M12 22s-2-2-3-4" />
+                        <path d="M6 2s-2 2-3 4" />
+                        <path d="m14 10-3 3.5" />
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-800">Nephrology</span>
+                </button>
+                <!-- Neurology -->
+                <button class="specialty-button w-full flex flex-col items-center p-4 bg-purple-100 rounded-xl hover:bg-purple-200" data-specialty="Neurology">
+                    <svg class="h-16 w-16 text-purple-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 21a9 9 0 0 0 9-9c0-6.2-4-9-9-9s-9 2.8-9 9a9 9 0 0 0 9 9Z" />
+                        <path d="M12 3a7.2 7.2 0 0 0-7.2 7.2c0 5.4 3.7 7.7 7.2 7.7s7.2-2.3 7.2-7.7A7.2 7.2 0 0 0 12 3Z" />
+                        <path d="M12 10V6" />
+                        <path d="M15 11.5L12 15" />
+                        <path d="M9 11.5L12 15" />
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-800">Neurology</span>
+                </button>
+                <!-- Pulmonology -->
+                <button class="specialty-button w-full flex flex-col items-center p-4 bg-green-100 rounded-xl hover:bg-green-200" data-specialty="Pulmonology">
+                    <svg class="h-16 w-16 text-green-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 13a4 4 0 0 0-4-4H9.5a2 2 0 0 1-2-2a2 2 0 0 1 4-4a2 2 0 0 1-4 4" />
+                        <path d="M19 13a4 4 0 0 0-4-4H9.5a2 2 0 0 0-2-2" />
+                        <path d="M15 17a4 4 0 0 0-4-4H9.5a2 2 0 0 1-2-2a2 2 0 0 1 4-4a2 2 0 0 1-4 4" />
+                        <path d="M19 17a4 4 0 0 0-4-4H9.5a2 2 0 0 0-2-2" />
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-800">Pulmonology</span>
+                </button>
+                <!-- Orthopedics -->
+                <button class="specialty-button w-full flex flex-col items-center p-4 bg-yellow-100 rounded-xl hover:bg-yellow-200" data-specialty="Orthopedics">
+                    <svg class="h-16 w-16 text-yellow-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 12l2 2 4-4" />
+                        <path d="M18 10h-2" />
+                        <path d="M15 18v-2" />
+                        <path d="M10 6v-2" />
+                        <path d="M6 14v2" />
+                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                        <path d="M18 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                        <path d="M6 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                        <path d="M12 18a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-800">Orthopedics</span>
+                </button>
+                <!-- Dermatology -->
+                <button class="specialty-button w-full flex flex-col items-center p-4 bg-pink-100 rounded-xl hover:bg-pink-200" data-specialty="Dermatology">
+                    <svg class="h-16 w-16 text-pink-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2c-3.314 0-6 2.686-6 6s2.686 6 6 6s6-2.686 6-6s-2.686-6-6-6z" />
+                        <path d="M12 14c-3.314 0-6 2.686-6 6s2.686 6 6 6s6-2.686 6-6s-2.686-6-6-6z" />
+                        <path d="M12 14c3.314 0 6 2.686 6 6s-2.686 6-6 6s-6-2.686-6-6s2.686-6 6-6z" />
+                        <path d="M12 2v20" />
+                        <path d="M2 12h20" />
+                        <path d="M12 21c-3.314 0-6-2.686-6-6s2.686-6 6-6s6 2.686 6 6s-2.686 6-6 6z" />
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-800">Dermatology</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Appointment Bar -->
+        <section class="bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Explore Your Dr,here:</h2>
+            <form id="appointment-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <!-- Step 1: Speciality -->
+                <div>
+                    <label for="specialty" class="block text-gray-700 font-medium mb-2">1. Choose a Speciality</label>
+                    <input type="text" id="specialty" name="specialty" placeholder="e.g., Cardiology" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                </div>
+
+                <!-- Step 2: Date -->
+                <div>
+                    <label for="date" class="block text-gray-700 font-medium mb-2">2. Select Date</label>
+                    <div class="relative">
+                        <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                    </div>
+                </div>
+
+                <!-- Step 3: Location -->
+                <div>
+                    <label for="location" class="block text-gray-700 font-medium mb-2">3. Enter Location</label>
+                    <input type="text" id="location" name="location" placeholder="e.g., Patna" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="md:col-span-2 lg:col-span-1">
+                    <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                        Search Doctors
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const specialtyButtons = document.querySelectorAll('.specialty-button');
+            const specialtyInput = document.getElementById('specialty');
+            const form = document.getElementById('appointment-form');
+
+            specialtyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const specialty = button.dataset.specialty;
+                    specialtyInput.value = specialty;
+                });
+            });
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                console.log('Form submitted with data:', data);
+                
+                // Here you would typically send this data to a server
+                // and handle the search results.
+                alert("Searching for doctors with the following criteria:\n" +
+                      "Specialty: " + data.specialty + "\n" +
+                      "Date: " + data.date + "\n" +
+                      "Location: " + data.location);
+            });
+
+            // Prevent the alert from being triggered in this environment.
+            if (typeof window.alert !== 'undefined') {
+                window.alert = function(message) {
+                    console.log('ALERT:', message);
+                };
+            }
+        });
+    </script>
+</body>
+</html>

@@ -85,14 +85,16 @@
 
       <div class="md:col-span-1 bg-white rounded-xl shadow-sm p-6 border border-gray-200 flex flex-col justify-between">
         <div class="space-y-4">
-          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm dept-btn">
-            <svg class="h-6 w-6 text-blue-500 dept-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+          <!-- Converted to anchor tag with a new icon -->
+          <a href="live_appointments.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm dept-btn">
+            <svg class="h-6 w-6 text-blue-500 dept-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"></svg>
             <span class="font-medium text-gray-800">Live Appointments</span>
-          </button>
-          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm time-btn">
-            <svg class="h-6 w-6 text-green-500 time-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+          </a>
+          <!-- Converted to anchor tag with a new icon -->
+          <a href="hospitals_near_me.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm time-btn">
+            <svg class="h-6 w-6 text-green-500 time-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"></svg>
             <span class="font-medium text-gray-800">Hospitals Near Me</span>
-          </button>
+          </a>
           <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm med-btn">
             <svg class="h-6 w-6 text-purple-500 med-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
             <span class="font-medium text-gray-800">Medicine Bar</span>
@@ -125,8 +127,10 @@
     const icons = {
       search: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5-5m2-6a7 7 0 11-14 0 7 7 0 0114 0z" />`,
       ai: `<circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="2"/>`,
-      dept: `<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/>`,
-      time: `<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2"/>`,
+      // New icon for Live Appointments (calendar)
+      dept: `<path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>`,
+      // New icon for Hospitals Near Me (map pin)
+      time: `<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>`,
       med: `<rect x="8" y="5" width="8" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 9v6" stroke="currentColor" stroke-width="2"/>`,
       guide: `<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/>`,
       unit: `<circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="17" r="4" stroke="currentColor" stroke-width="2"/>`,
