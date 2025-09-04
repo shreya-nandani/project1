@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Updated Background */
+    body {
+      background: linear-gradient(135deg, #1a649c, #139a7a); /* light blue → mint */
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+<body class="p-6">
+
+  <div class="max-w-7xl mx-auto bg-red-50 rounded-xl shadow-lg p-8 transform transition-transform duration-500 hover:scale-[1.005]">
+    <header class="flex justify-between items-center mb-6">
+      <div class="flex items-center">
+        <img src="healx.png" alt="HealX Logo" class="h-28 mr-10"> <h1 class="text-2xl font-bold text-gray-900">HealX Dashboard</h1>
+      </div>
+
+      <div class="relative flex-grow mr-4">
+        <input type="text" placeholder="Search..." class="w-full pl-8 pr-3 py-2 rounded-full border border-green-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>
+      </div>
+
+      <button class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-blue-700 transition duration-300 flex items-center space-x-2 ai-btn">
+        <svg class="h-6 w-6 ai-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+        <span>AI Assistant</span>
+      </button>
+    </header>
+
+    <main class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="md:col-span-3 space-y-6">
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Demographic Profile</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600">
+            <p><strong>Name:</strong> Ranchor Das</p>
+            <p><strong>Date of Birth:</strong> 01/01/1990</p>
+            <p><strong>Gender:</strong> Male</p>
+            <p><strong>Address:</strong> 123 Main Street, Marh.,841418,Bihar</p>
+            <p><strong>Email:</strong> ranchoe.doe@ex.com</p>
+            <p><strong>Phone:</strong> (123) 456-7890</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Consent History</h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <li>Consent for treatment signed on 10/25/2023.</li>
+            <li>Consent for information release signed on 11/05/2023.</li>
+            <li>Consent to use of telemedicine services signed on 12/15/2023.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Family History</h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <li><strong>Mother:</strong> History of hypertension.</li>
+            <li><strong>Father:</strong> No significant history reported.</li>
+            <li><strong>Sibling:</strong> History of allergies.</li>
+          </ul>
+        </div>
+
+        <div class="bg-red-500 rounded-xl shadow-sm p-6 border-l-4 border-red-500 hover:shadow-md transition-shadow duration-300">
+          <h2 class="text-xl font-semibold text-red-800 mb-4">Emergency Contact</h2>
+          <div class="flex items-center space-x-4">
+            <div class="flex-grow">
+              <p class="font-medium text-gray-800">Rashi Das(wife)</p>
+              <p class="text-gray-600">Phone: (987) 654-3210</p>
+            </div>
+            <button class="bg-green text-white font-semibold py-2 px-4 rounded-full shadow-md hover:bg-red-700 transition duration-300">
+              Call Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-1 bg-white rounded-xl shadow-sm p-6 border border-gray-200 flex flex-col justify-between">
+        <div class="space-y-4">
+          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm dept-btn">
+            <svg class="h-6 w-6 text-blue-500 dept-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+            <span class="font-medium text-gray-800">Departments</span>
+          </button>
+          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm time-btn">
+            <svg class="h-6 w-6 text-green-500 time-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+            <span class="font-medium text-gray-800">Doctor Time</span>
+          </button>
+          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm med-btn">
+            <svg class="h-6 w-6 text-purple-500 med-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+            <span class="font-medium text-gray-800">Medicine Bar</span>
+          </button>
+          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm guide-btn">
+            <svg class="h-6 w-6 text-orange-500 guide-icon" xmlns="http://www.w3.org/2000/svg" fill="none"></svg>
+            <span class="font-medium text-gray-800">Guidelines</span>
+          </button>
+          <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2 13v-3h20v3m-2-3h-2v-2h-2v2h-8v-2h-2v2h-2v-3h20v3z" />
+              </svg>
+             <span class="font-medium text-gray-800">Units</span>
+            </button>       
+               <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.365-.89 1.547-.89 1.912 0l2.36 5.764a1 1 0 00.947.697h6.082a1 1 0 01.697 1.705l-4.924 3.58a1 1 0 00-.363 1.118l1.87 5.92c.28.89-.924 1.633-1.688 1.155l-4.945-3.045a1 1 0 00-1.118 0L6.4 20.91a1 1 0 01-1.688-1.155l1.87-5.92a1 1 0 00-.363-1.118L2.09 11.093a1 1 0 01.697-1.705h6.082a1 1 0 00.947-.697l2.36-5.764z" />
+                        </svg>
+                        <span class="font-medium text-gray-800">Reviews</span>
+                    </button>
+
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Replace SVG icons dynamically
+    const icons = {
+      search: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5-5m2-6a7 7 0 11-14 0 7 7 0 0114 0z" />`,
+      ai: `<circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="2"/>`,
+      dept: `<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/>`,
+      time: `<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2"/>`,
+      med: `<rect x="8" y="5" width="8" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 9v6" stroke="currentColor" stroke-width="2"/>`,
+      guide: `<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/>`,
+      unit: `<circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="17" r="4" stroke="currentColor" stroke-width="2"/>`,
+      review: `<path d="M12 2l3 7h7l-5.5 4.5L18 22l-6-4-6 4 1.5-8.5L2 9h7l3-7z" stroke="currentColor" stroke-width="2" fill="none"/>`
+    };
+
+    document.querySelector(".search-icon").innerHTML = icons.search;
+    document.querySelector(".ai-icon").innerHTML = icons.ai;
+    document.querySelector(".dept-icon").innerHTML = icons.dept;
+    document.querySelector(".time-icon").innerHTML = icons.time;
+    document.querySelector(".med-icon").innerHTML = icons.med;
+    document.querySelector(".guide-icon").innerHTML = icons.guide;
+    document.querySelector(".unit-icon").innerHTML = icons.unit;
+    document.querySelector(".review-icon").innerHTML = icons.review;
+
+    // AI button action
+    document.querySelector(".ai-btn").addEventListener("click", () => {
+      alert("AI Assistant activated!");
+    });
+  </script>
+</body>
+</html>
