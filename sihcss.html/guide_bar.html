@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Remedies & Yoga</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .expand {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-in-out;
+    }
+    .expand.show {
+      max-height: 400px;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-green-100 to-blue-100 min-h-screen p-6">
+
+  <h1 class="text-3xl font-bold text-center mb-6 text-green-800">🌿 Home Remedies & Yoga Guide</h1>
+  <p class="text-center text-gray-700 mb-10">Click on a condition card to see remedies & yoga.</p>
+
+  <!-- Grid for illness cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+    <!-- Example Card -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🤕 Headache</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Drink ginger tea, apply peppermint oil on temples, stay hydrated.</p>
+        <p><b>Yoga:</b> Child’s Pose, Forward Bend, Cat-Cow.</p>
+      </div>
+    </div>
+
+    <!-- Period Pain -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🩸 Period Pain</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Warm compress, ginger tea, avoid junk food.</p>
+        <p><b>Yoga:</b> Reclined Bound Angle Pose, Supine Twist.</p>
+      </div>
+    </div>
+
+    <!-- Fever -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🤒 Fever</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Tulsi & ginger tea, sponge bath, hydration.</p>
+        <p><b>Yoga:</b> Anulom-Vilom, Supported Bridge.</p>
+      </div>
+    </div>
+
+    <!-- Car Sickness -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🚗🤢 Car Sickness</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Chew ginger, fresh air, avoid reading.</p>
+        <p><b>Yoga:</b> Deep breathing, Sukhasana.</p>
+      </div>
+    </div>
+
+    <!-- Breathing Issues -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🌬️ Breathing Issues</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Steam inhalation, warm water, avoid cold air.</p>
+        <p><b>Yoga:</b> Anulom-Vilom, Bhramari, Bhujangasana.</p>
+      </div>
+    </div>
+
+    <!-- Wound Healing -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🩹 Wound Healing</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Turmeric paste, aloe vera, keep clean.</p>
+        <p><b>Yoga:</b> Gentle restorative yoga.</p>
+      </div>
+    </div>
+
+    <!-- Cuts -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">✂️ Cuts</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Wash, apply honey or aloe vera, bandage.</p>
+        <p><b>Yoga:</b> Focus on meditation & breathwork.</p>
+      </div>
+    </div>
+
+    <!-- Diabetes -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🩺 Diabetes</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Karela juice, avoid sugar, eat fiber-rich foods.</p>
+        <p><b>Yoga:</b> Kapalbhati, Ardha Matsyendrasana.</p>
+      </div>
+    </div>
+
+    <!-- Morning Sickness -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🤰 Morning Sickness</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Small meals, ginger tea, avoid strong smells.</p>
+        <p><b>Yoga:</b> Prenatal yoga, breathing, Shavasana.</p>
+      </div>
+    </div>
+
+    <!-- Snake Bite -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🐍 Snake Bite</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-red-600">
+        <p><b>⚠️ Emergency:</b> Needs immediate medical care. Keep still, tie above bite, rush to hospital.</p>
+        <p class="mt-2 text-gray-700"><b>Yoga/Remedies:</b> None. Medical help only.</p>
+      </div>
+    </div>
+
+    <!-- Body Pain -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">💪 Body Pain</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Warm bath, massage with oil, turmeric milk.</p>
+        <p><b>Yoga:</b> Surya Namaskar, Child’s Pose.</p>
+      </div>
+    </div>
+
+    <!-- Acne -->
+    <div class="bg-white shadow-md rounded-xl p-4 cursor-pointer" onclick="toggleExpand(this)">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-lg">🌸 Acne & Pimples</span>
+        <span class="text-gray-500">▼</span>
+      </div>
+      <div class="expand mt-3 text-gray-700">
+        <p class="mb-2"><b>Remedies:</b> Aloe vera gel, neem paste, drink water, avoid oily food.</p>
+        <p><b>Yoga:</b> Kapalbhati, Sarvangasana.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleExpand(element) {
+      const content = element.querySelector('.expand');
+      content.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

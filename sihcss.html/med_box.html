@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Bar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      /* Warm, creative gradient background */
+      background: linear-gradient(135deg, #FAD0C4, #FFD1A6); 
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+<body class="p-6">
+
+  <div class="max-w-7xl mx-auto bg-orange-50 rounded-xl shadow-lg p-8 transform transition-transform duration-500 hover:scale-[1.005]">
+    <header class="flex justify-between items-center mb-6 pb-4 border-b border-orange-300">
+      <a href="patient_dashboard.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        
+      </a>
+      <h1 class="text-2xl font-bold text-gray-900">Medicine Bar</h1>
+      <div class="text-sm font-medium text-gray-600">Total Medicines Available: <span id="total-med-count"></span></div>
+    </header>
+
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-semibold text-gray-800">All Medicines</h2>
+      <button id="toggle-baby-products" class="bg-orange-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-600 transition duration-300">
+        Show Baby Products
+      </button>
+    </div>
+
+    <div id="medicine-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Medicine cards will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initial data for medicines and baby products
+      const allMedicines = [
+        { name: "Paracetamol", use: "Fever, Pain Relief", price: "₹25.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Tab", details: "Used for the temporary relief of pain and fever. Comes in tablet form. Safe for most ages." },
+        { name: "Amoxicillin", use: "Bacterial Infections", price: "₹85.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Capsule", details: "An antibiotic used to treat various types of bacterial infections, such as tonsillitis and pneumonia." },
+        { name: "Loratadine", use: "Allergies", price: "₹50.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Syrup", details: "A non-drowsy antihistamine used to relieve allergy symptoms like sneezing, runny nose, and hives." },
+        { name: "Omeprazole", use: "Acidity, Heartburn", price: "₹45.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Pill", details: "Reduces the amount of acid the stomach produces, used for acid reflux and heartburn." },
+        { name: "Cough Syrup", use: "Cough", price: "₹90.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Syrup", details: "Effective in treating both dry and wet cough. Provides soothing relief and helps clear mucus." },
+        { name: "Ibuprofen", use: "Pain, Inflammation", price: "₹35.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Capsule", details: "A nonsteroidal anti-inflammatory drug (NSAID) used for pain relief and reducing inflammation." },
+        { name: "Vitamin C", use: "Immunity", price: "₹75.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Tablet", details: "A vital nutrient and antioxidant that supports immune health and tissue repair." },
+        { name: "Antacid", use: "Indigestion", price: "₹15.00", img: "https://placehold.co/100x100/A0E7E5/000000?text=Liquid", details: "Used to neutralize stomach acid and provide quick relief from indigestion and bloating." },
+      ];
+      const babyProducts = [
+        { name: "Baby Powder", use: "Diaper Rash", price: "₹120.00", img: "https://placehold.co/100x100/B0E0E6/000000?text=Powder", details: "Soothes and protects baby's delicate skin from irritation and diaper rash." },
+        { name: "Baby Oil", use: "Massage", price: "₹150.00", img: "https://placehold.co/100x100/B0E0E6/000000?text=Oil", details: "Gentle formula for massaging baby's skin. Locks in moisture and keeps skin soft." },
+        { name: "Baby Wipes", use: "Cleaning", price: "₹80.00", img: "https://placehold.co/100x100/B0E0E6/000000?text=Wipes", details: "Hypoallergenic and alcohol-free wipes for quick and gentle cleaning." },
+      ];
+
+      const medicineListContainer = document.getElementById('medicine-list');
+      const totalMedCountSpan = document.getElementById('total-med-count');
+      const toggleBabyProductsBtn = document.getElementById('toggle-baby-products');
+      let isShowingBabyProducts = false;
+
+      // Function to render medicine cards
+      function renderMedicines(products) {
+        medicineListContainer.innerHTML = ''; // Clear previous content
+        products.forEach(product => {
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-xl shadow-sm p-4 border border-gray-200 hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center';
+          card.innerHTML = `
+            <img src="${product.img}" alt="${product.name}" class="w-24 h-24 mb-3 rounded-lg object-cover">
+            <h3 class="text-md font-semibold text-gray-800">${product.name} <span class="text-sm font-normal text-gray-500">(${product.use})</span></h3>
+            <p class="text-gray-600 text-sm mt-1 mb-2">${product.details}</p>
+            <div class="flex items-center justify-between w-full mt-auto pt-2 border-t border-gray-100">
+              <span class="text-xl font-bold text-gray-900">${product.price}</span>
+              <button class="pay-btn bg-green-500 text-white font-semibold py-2 px-4 rounded-full shadow-md hover:bg-green-600 transition duration-300">
+                Pay
+              </button>
+            </div>
+          `;
+          medicineListContainer.appendChild(card);
+        });
+
+        // Update the count and button text
+        totalMedCountSpan.textContent = products.length;
+        toggleBabyProductsBtn.textContent = isShowingBabyProducts ? 'Show All Medicines' : 'Show Baby Products';
+      }
+
+      // Toggle between all products and baby products
+      toggleBabyProductsBtn.addEventListener('click', () => {
+        isShowingBabyProducts = !isShowingBabyProducts;
+        if (isShowingBabyProducts) {
+          renderMedicines(babyProducts);
+          // Update the heading to reflect the current view
+          document.querySelector('h2').textContent = 'Baby Products';
+        } else {
+          renderMedicines(allMedicines);
+          document.querySelector('h2').textContent = 'All Medicines';
+        }
+      });
+      
+      // Add event listener for "Pay" buttons
+      medicineListContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('pay-btn')) {
+          const card = event.target.closest('.medicine-card');
+          const productName = card ? card.querySelector('h3').textContent.trim() : 'Unknown Product';
+          console.log(`Payment for ${productName} initiated.`);
+          // Display a confirmation message without using alert()
+          const payMessage = document.createElement('div');
+          payMessage.className = 'fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl animate-fade-in z-50';
+          payMessage.textContent = `Payment for ${productName.split('(')[0].trim()} successful!`;
+          document.body.appendChild(payMessage);
+          setTimeout(() => {
+            payMessage.remove();
+          }, 3000);
+        }
+      });
+
+      // Render default medicines on initial load
+      renderMedicines(allMedicines);
+    });
+  </script>
+</body>
+</html>

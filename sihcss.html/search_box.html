@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1a649c, #139a7a);
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-7xl mx-auto bg-red-50 rounded-xl shadow-lg p-8 transform transition-transform duration-500 hover:scale-[1.005]">
+        <header class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
+            <div class="flex items-center">
+                <img src="https://placehold.co/100x100/1a649c/ffffff?text=HealX" alt="HealX Logo" class="h-28 mr-10">
+                <h1 class="text-2xl font-bold text-gray-900">HealX Dashboard</h1>
+            </div>
+
+            <!-- The Search component is now wrapped in an anchor tag as requested -->
+            <a href="#" class="relative flex-grow mr-4 w-full md:w-1/2 lg:w-1/3">
+                <input type="text" placeholder="Search..." class="w-full pl-8 pr-3 py-2 rounded-full border border-green-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>
+            </a>
+
+            <button class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-blue-700 transition duration-300 flex items-center space-x-2 ai-btn w-full sm:w-auto">
+                <svg class="h-6 w-6 ai-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"></svg>
+                <span>AI Assistant</span>
+            </button>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="md:col-span-3 space-y-6">
+               <!-- Demographic Profile - Now Responsive and Scrollable -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Demographic Profile</h2>
+                    <form id="demographic-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600 max-h-60 overflow-y-auto pr-2">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" value="Ranchor Das" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="text" id="dob" value="01/01/1990" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                            <input type="text" id="gender" value="Male" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                            <input type="text" id="address" value="123 Main Street, Marh.,841418,Bihar" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="married" class="block text-sm font-medium text-gray-700">Married</label>
+                            <input type="text" id="married" value="Yes" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="kids" class="block text-sm font-medium text-gray-700">Number of kids</label>
+                            <input type="text" id="kids" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="religion" class="block text-sm font-medium text-gray-700">Religion</label>
+                            <input type="text" id="religion" value="Hindu" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" value="ranchoe.doe@ex.com" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                            <input type="tel" id="phone" value="(123) 456-7890" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                    </form>
+                    <button id="save-demographics" class="mt-6 bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-blue-700 transition duration-300">
+                        Save
+                    </button>
+                    <div id="save-message" class="mt-4 text-sm text-center font-medium"></div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Consent History</h2>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Consent for treatment signed on 10/25/2023.</li>
+                        <li>Consent for information release signed on 11/05/2023.</li>
+                        <li>Consent to use of telemedicine services signed on 12/15/2023.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Family History</h2>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li><strong>Mother:</strong> History of hypertension.</li>
+                        <li><strong>Father:</strong> No significant history reported.</li>
+                        <li><strong>Sibling:</strong> History of allergies.</li>
+                    </ul>
+                </div>
+
+                <!-- Emergency Contact - Now Responsive -->
+                <div class="bg-red-50 rounded-xl shadow-sm p-6 border-l-4 border-red-500 hover:shadow-md transition-shadow duration-300">
+                    <h2 class="text-xl font-semibold text-red-800 mb-4">Emergency Contact</h2>
+                    <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <div class="flex-grow">
+                            <p class="font-medium text-gray-800">Rashi Das(wife)</p>
+                            <p class="text-gray-600">Phone: (987) 654-3210</p>
+                        </div>
+                        <a href="tel:9876543210" class="bg-red-600 text-white font-semibold py-2 px-4 rounded-full shadow-md hover:bg-red-700 transition duration-300">
+                            Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-1 bg-white rounded-xl shadow-sm p-6 border border-gray-200 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <a href="live_appointments.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <!-- Added `dept-icon` class for JavaScript to find and replace -->
+                        <svg class="h-6 w-6 text-blue-500 dept-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="font-medium text-gray-800">Live Appointments</span>
+                    </a>
+                    <a href="hospitals_near_me.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <!-- Added `time-icon` class for JavaScript to find and replace -->
+                        <svg class="h-6 w-6 text-green-500 time-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span class="font-medium text-gray-800">Hospitals Near Me</span>
+                    </a>
+                    <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <svg class="h-6 w-6 text-purple-500 med-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <rect x="8" y="5" width="8" height="14" rx="2"/><path d="M12 9v6" />
+                        </svg>
+                        <span class="font-medium text-gray-800">Medicine Bar</span>
+                    </button>
+                    <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <svg class="h-6 w-6 text-orange-500 guide-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <span class="font-medium text-gray-800">Guidelines</span>
+                    </button>
+                    <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <svg class="h-6 w-6 text-yellow-500 unit-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2 13v-3h20v3m-2-3h-2v-2h-2v2h-8v-2h-2v2h-2v-3h20v3z" />
+                        </svg>
+                        <span class="font-medium text-gray-800">Units</span>
+                    </button>
+                    <button class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+                        <svg class="h-6 w-6 text-teal-500 review-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.365-.89 1.547-.89 1.912 0l2.36 5.764a1 1 0 00.947.697h6.082a1 1 0 01.697 1.705l-4.924 3.58a1 1 0 00-.363 1.118l1.87 5.92c.28.89-.924 1.633-1.688 1.155l-4.945-3.045a1 1 0 00-1.118 0L6.4 20.91a1 1 0 01-1.688-1.155l1.87-5.92a1 1 0 00-.363-1.118L2.09 11.093a1 1 0 01.697-1.705h6.082a1 1 0 00.947-.697l2.36-5.764z" />
+                        </svg>
+                        <span class="font-medium text-gray-800">Reviews</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Replace SVG icons dynamically
+        const icons = {
+            search: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5-5m2-6a7 7 0 11-14 0 7 7 0 0114 0z" />`,
+            ai: `<circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="2"/>`,
+            dept: `<path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>`,
+            time: `<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>`,
+            med: `<rect x="8" y="5" width="8" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 9v6" stroke="currentColor" stroke-width="2"/>`,
+            guide: `<path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/>`,
+            unit: `<path stroke-linecap="round" stroke-linejoin="round" d="M2 13v-3h20v3m-2-3h-2v-2h-2v2h-8v-2h-2v2h-2v-3h20v3z"/>`,
+            review: `<path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.365-.89 1.547-.89 1.912 0l2.36 5.764a1 1 0 00.947.697h6.082a1 1 0 01.697 1.705l-4.924 3.58a1 1 0 00-.363 1.118l1.87 5.92c.28.89-.924 1.633-1.688 1.155l-4.945-3.045a1 1 0 00-1.118 0L6.4 20.91a1 1 0 01-1.688-1.155l1.87-5.92a1 1 0 00-.363-1.118L2.09 11.093a1 1 0 01.697-1.705h6.082a1 1 0 00.947-.697l2.36-5.764z" />`
+        };
+
+        // There was a syntax error in the HTML. I have corrected the repeated `</button>` tags.
+        // The SVG paths are now correctly placed.
+        document.querySelector(".search-icon").innerHTML = icons.search;
+        document.querySelector(".ai-icon").innerHTML = icons.ai;
+        document.querySelector(".dept-icon").innerHTML = icons.dept;
+        document.querySelector(".time-icon").innerHTML = icons.time;
+        document.querySelector(".med-icon").innerHTML = icons.med;
+        document.querySelector(".guide-icon").innerHTML = icons.guide;
+
+        // The following lines were missing from the original script
+        document.querySelector(".unit-icon").innerHTML = icons.unit;
+        document.querySelector(".review-icon").innerHTML = icons.review;
+
+        // Handle AI button click - no more alerts
+        document.querySelector(".ai-btn").addEventListener("click", () => {
+            document.querySelector("#save-message").textContent = "AI Assistant activated! Check the console for more details.";
+            console.log("AI Assistant activated!");
+        });
+
+        // Handle Save button for demographics
+        document.getElementById("save-demographics").addEventListener("click", () => {
+            const form = document.getElementById("demographic-form");
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            console.log("Demographic data saved:", data);
+            
+            // Display a temporary save confirmation message
+            const saveMessage = document.getElementById("save-message");
+            saveMessage.textContent = "Profile updated successfully!";
+            saveMessage.classList.add("text-green-500");
+            setTimeout(() => {
+                saveMessage.textContent = "";
+                saveMessage.classList.remove("text-green-500");
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
