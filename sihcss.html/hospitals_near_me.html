@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Bed Availability Near Me</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hospital-icon-card {
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            user-select: none;
+        }
+        .hospital-icon-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #4f46e5; /* indigo-600 */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center p-4">
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 max-w-4xl">
+
+        <!-- Header -->
+        <header class="text-center my-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2">
+                Hospital Bed Availability
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400">
+                Select a hospital to check its bed availability in Bhubaneswar.
+            </p>
+        </header>
+
+        <!-- Hospital Selection Section -->
+        <section id="hospital-selection" class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-slate-800 rounded-2xl shadow-xl mb-8">
+            <div id="sum-hospital-icon" class="hospital-icon-card flex flex-col items-center p-4 bg-slate-700 rounded-2xl border border-slate-700">
+                <span class="text-4xl md:text-5xl mb-2">🏥</span>
+                <p class="text-xs md:text-sm font-semibold text-white text-center">SUM Hospital</p>
+            </div>
+            <div id="kiit-hospital-icon" class="hospital-icon-card flex flex-col items-center p-4 bg-slate-700 rounded-2xl border border-slate-700">
+                <span class="text-4xl md:text-5xl mb-2">⚕️</span>
+                <p class="text-xs md:text-sm font-semibold text-white text-center">KIIT Medical College</p>
+            </div>
+            <div id="apollo-hospital-icon" class="hospital-icon-card flex flex-col items-center p-4 bg-slate-700 rounded-2xl border border-slate-700">
+                <span class="text-4xl md:text-5xl mb-2">🚑</span>
+                <p class="text-xs md:text-sm font-semibold text-white text-center">Apollo Hospitals</p>
+            </div>
+            <div id="utkal-hospital-icon" class="hospital-icon-card flex flex-col items-center p-4 bg-slate-700 rounded-2xl border border-slate-700">
+                <span class="text-4xl md:text-5xl mb-2">❤️</span>
+                <p class="text-xs md:text-sm font-semibold text-white text-center">Utkal Hospital</p>
+            </div>
+        </section>
+
+        <!-- Dynamic Content Section -->
+        <section id="hospitals-list" class="space-y-6">
+            <!-- Hospital cards will be injected here by JavaScript -->
+        </section>
+
+        <!-- Message/Status Section -->
+        <div id="status-message" class="text-center mt-8 text-slate-400">
+            <!-- Status messages (loading, errors) will appear here -->
+            <p>Select a hospital above to see real-time bed availability.</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to DOM elements
+            const sumIcon = document.getElementById('sum-hospital-icon');
+            const kiitIcon = document.getElementById('kiit-hospital-icon');
+            const apolloIcon = document.getElementById('apollo-hospital-icon');
+            const utkalIcon = document.getElementById('utkal-hospital-icon');
+            const hospitalsList = document.getElementById('hospitals-list');
+            const statusMessage = document.getElementById('status-message');
+
+            // Add click event listeners to the new icons
+            sumIcon.addEventListener('click', () => {
+                hospitalsList.innerHTML = '';
+                statusMessage.innerHTML = '';
+                fetchHospitalData("SUM Hospital");
+            });
+
+            kiitIcon.addEventListener('click', () => {
+                hospitalsList.innerHTML = '';
+                statusMessage.innerHTML = '';
+                fetchHospitalData("KIIT Medical College");
+            });
+
+            apolloIcon.addEventListener('click', () => {
+                hospitalsList.innerHTML = '';
+                statusMessage.innerHTML = '';
+                fetchHospitalData("Apollo Hospitals");
+            });
+            
+            utkalIcon.addEventListener('click', () => {
+                hospitalsList.innerHTML = '';
+                statusMessage.innerHTML = '';
+                fetchHospitalData("Utkal Hospital");
+            });
+
+            // Function to calculate distance between two points using Haversine formula
+            function getDistance(lat1, lon1, lat2, lon2) {
+                const toRad = (x) => x * Math.PI / 180;
+                const R = 6371; // Radius of the Earth in km
+                const dLat = toRad(lat2 - lat1);
+                const dLon = toRad(lon2 - lon1);
+                const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                          Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                const d = R * c;
+                return d.toFixed(2);
+            }
+
+            // Function to fetch data for a specific hospital
+            function fetchHospitalData(hospitalName) {
+                // Show loading indicator
+                statusMessage.innerHTML = `
+                    <div class="flex flex-col items-center">
+                        <svg class="animate-spin h-8 w-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="mt-2 text-indigo-400">Fetching your location...</span>
+                    </div>
+                `;
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        const userLat = position.coords.latitude;
+                        const userLon = position.coords.longitude;
+                        
+                        statusMessage.innerHTML = `<span class="mt-2 text-indigo-400">Fetching data for ${hospitalName}...</span>`;
+
+                        // Simulate network delay and get mock data
+                        setTimeout(() => {
+                            const hospital = getMockHospitalData(hospitalName);
+                            const distance = getDistance(userLat, userLon, hospital.lat, hospital.lon);
+                            renderHospitals([{ ...hospital, distance }]);
+                        }, 1500); // Simulate network delay
+
+                    }, (error) => {
+                        // The Geolocation API failed. Do not log to console to avoid spamming.
+                        statusMessage.innerHTML = `<p class="text-orange-400">Unable to determine your location. Distance will not be shown.</p>`;
+                        // Fallback to mock data without real-time distance
+                        setTimeout(() => {
+                            const hospital = getMockHospitalData(hospitalName);
+                            renderHospitals([{ ...hospital, distance: 'N/A' }]);
+                        }, 1500);
+                    });
+                } else {
+                    statusMessage.innerHTML = `<p class="text-orange-400">Error: Geolocation is not supported by your browser. Cannot calculate distance.</p>`;
+                    setTimeout(() => {
+                        const hospital = getMockHospitalData(hospitalName);
+                        renderHospitals([{ ...hospital, distance: 'N/A' }]);
+                    }, 1500);
+                }
+            }
+
+            // Function to generate mock data for a specific hospital
+            function getMockHospitalData(hospitalName) {
+                const totalICUBeds = Math.floor(Math.random() * 20) + 5;
+                const availableICUBeds = Math.floor(Math.random() * (totalICUBeds + 1));
+                const totalNormalBeds = Math.floor(Math.random() * 100) + 50;
+                const availableNormalBeds = Math.floor(Math.random() * (totalNormalBeds + 1));
+
+                let address = "Unknown Address";
+                let phone = "Not Available";
+                let reviews = [];
+                let lat, lon;
+
+                if (hospitalName === "SUM Hospital") {
+                    address = "Kalinga Nagar, Bhubaneswar, Odisha 751003";
+                    phone = "+91-674-2371212";
+                    lat = 20.2646;
+                    lon = 85.8066;
+                    reviews = [
+                        { author: "Rahul S.", rating: 5, text: "Excellent care and facilities. The doctors are very professional and attentive." },
+                        { author: "Priya K.", rating: 4, text: "Good service, but waiting times can be long. The staff is friendly." }
+                    ];
+                } else if (hospitalName === "KIIT Medical College") {
+                    address = "Campus-11, Patia, Bhubaneswar, Odisha 751024";
+                    phone = "+91-674-2725000";
+                    lat = 20.3551;
+                    lon = 85.8197;
+                    reviews = [
+                        { author: "Akash M.", rating: 5, text: "Top-notch medical education and care. A clean and well-maintained campus." },
+                        { author: "Anjali G.", rating: 4, text: "The hospital is great, but the parking is a bit difficult to find." }
+                    ];
+                } else if (hospitalName === "Apollo Hospitals") {
+                    address = "Plot 251, Sainik School Rd, Unit-15, Bhubaneswar, Odisha 751005";
+                    phone = "+91-674-6660100";
+                    lat = 20.2711;
+                    lon = 85.8308;
+                    reviews = [
+                        { author: "Siddharth D.", rating: 5, text: "The best hospital in the city. The staff is caring and the treatments are effective." },
+                        { author: "Laxmi P.", rating: 3, text: "Very expensive, but the quality of care is high. Could improve on communication." }
+                    ];
+                } else if (hospitalName === "Utkal Hospital") {
+                    address = "NH-16, Bomikhal, Bhubaneswar, Odisha 751010";
+                    phone = "+91-674-2371234";
+                    lat = 20.2926;
+                    lon = 85.8398;
+                    reviews = [
+                        { author: "Deepak R.", rating: 4, text: "Good hospital with reasonable prices. The doctors are experienced." },
+                        { author: "Nisha B.", rating: 4, text: "The services are quick and the staff is cooperative." }
+                    ];
+                }
+
+                return {
+                    id: hospitalName.toLowerCase().replace(/\s/g, '-'),
+                    name: hospitalName,
+                    address: address,
+                    phone: phone,
+                    reviews: reviews,
+                    beds: {
+                        icu: {
+                            total: totalICUBeds,
+                            occupied: totalICUBeds - availableICUBeds,
+                            available: availableICUBeds
+                        },
+                        normal: {
+                            total: totalNormalBeds,
+                            occupied: totalNormalBeds - availableNormalBeds,
+                            available: availableNormalBeds
+                        }
+                    },
+                    lat,
+                    lon
+                };
+            }
+
+            // Function to render the hospital cards
+            function renderHospitals(hospitals) {
+                statusMessage.innerHTML = ''; // Clear status message
+                if (hospitals.length === 0) {
+                    statusMessage.innerHTML = `<p class="text-orange-400">No hospitals found nearby. Please try again later.</p>`;
+                    return;
+                }
+
+                hospitals.forEach(hospital => {
+                    const card = document.createElement('div');
+                    card.classList.add('p-6', 'bg-slate-800', 'rounded-2xl', 'shadow-md', 'border', 'border-slate-700', 'hover:border-indigo-500', 'transition-all', 'duration-300', 'ease-in-out');
+
+                    // Function to get color based on bed availability
+                    function getColor(available, total) {
+                        const ratio = available / total;
+                        if (ratio > 0.5) return 'text-green-400';
+                        if (ratio > 0.1) return 'text-yellow-400';
+                        return 'text-red-400';
+                    }
+
+                    const icuColor = getColor(hospital.beds.icu.available, hospital.beds.icu.total);
+                    const normalColor = getColor(hospital.beds.normal.available, hospital.beds.normal.total);
+
+                    // Generate reviews HTML
+                    const reviewsHtml = hospital.reviews.map(review => `
+                        <div class="mb-2">
+                            <p class="text-sm font-semibold text-white">
+                                ${review.author} 
+                                <span class="text-yellow-400">${'⭐'.repeat(review.rating)}</span>
+                            </p>
+                            <p class="text-xs text-slate-400">${review.text}</p>
+                        </div>
+                    `).join('');
+
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">${hospital.name}</h2>
+                                <p class="text-slate-400 mt-1">${hospital.address}</p>
+                            </div>
+                            <span class="text-indigo-400 font-semibold text-lg ml-4">
+                                ${hospital.distance} km
+                            </span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- ICU Beds -->
+                            <div class="bg-slate-700 p-4 rounded-xl">
+                                <h3 class="font-semibold text-slate-300 mb-2">ICU Beds</h3>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-4xl font-bold ${icuColor}">${hospital.beds.icu.available}</span>
+                                    <span class="text-slate-400">/ ${hospital.beds.icu.total} available</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-600 rounded-full mt-2">
+                                    <div class="h-2 rounded-full ${hospital.beds.icu.available / hospital.beds.icu.total > 0.5 ? 'bg-green-500' : (hospital.beds.icu.available / hospital.beds.icu.total > 0.1 ? 'bg-yellow-500' : 'bg-red-500')}" 
+                                         style="width: ${hospital.beds.icu.available / hospital.beds.icu.total * 100}%"></div>
+                                </div>
+                            </div>
+                            <!-- Normal Beds -->
+                            <div class="bg-slate-700 p-4 rounded-xl">
+                                <h3 class="font-semibold text-slate-300 mb-2">Normal Beds</h3>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-4xl font-bold ${normalColor}">${hospital.beds.normal.available}</span>
+                                    <span class="text-slate-400">/ ${hospital.beds.normal.total} available</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-600 rounded-full mt-2">
+                                    <div class="h-2 rounded-full ${hospital.beds.normal.available / hospital.beds.normal.total > 0.5 ? 'bg-green-500' : (hospital.beds.normal.available / hospital.beds.normal.total > 0.1 ? 'bg-yellow-500' : 'bg-red-500')}"
+                                         style="width: ${hospital.beds.normal.available / hospital.beds.normal.total * 100}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact and Reviews -->
+                        <div class="mt-6 border-t border-slate-700 pt-4">
+                            <div class="mb-4">
+                                <a href="tel:${hospital.phone}" class="inline-block px-4 py-2 font-semibold text-white bg-green-600 rounded-full shadow-lg hover:bg-green-700 transition-colors duration-300 ease-in-out">
+                                    Call Now
+                                </a>
+                                <span class="ml-4 text-slate-400">Phone: ${hospital.phone}</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-300 mb-2">Recent Reviews</h3>
+                                ${reviewsHtml}
+                            </div>
+                        </div>
+                    `;
+                    hospitalsList.appendChild(card);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
