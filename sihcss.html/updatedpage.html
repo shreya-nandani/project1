@@ -37,19 +37,52 @@
       </button>
     </header>
 
-    <main class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      <div class="md:col-span-3 space-y-6">
-        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Demographic Profile</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600">
-            <p><strong>Name:</strong> Ranchor Das</p>
-            <p><strong>Date of Birth:</strong> 01/01/1990</p>
-            <p><strong>Gender:</strong> Male</p>
-            <p><strong>Address:</strong> 123 Main Street, Marh.,841418,Bihar</p>
-            <p><strong>Email:</strong> ranchoe.doe@ex.com</p>
-            <p><strong>Phone:</strong> (123) 456-7890</p>
-          </div>
-        </div>
+<!-- Demographic Profile - Now Responsive and Scrollable -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Demographic Profile</h2>
+                    <form id="demographic-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600 max-h-60 overflow-y-auto pr-2">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" value="Ranchor Das" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="text" id="dob" value="01/01/1990" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                            <input type="text" id="gender" value="Male" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                            <input type="text" id="address" value="123 Main Street, Marh.,841418,Bihar" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="married" class="block text-sm font-medium text-gray-700">Married</label>
+                            <input type="text" id="married" value="Yes" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="kids" class="block text-sm font-medium text-gray-700">Number of kids</label>
+                            <input type="text" id="kids" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="religion" class="block text-sm font-medium text-gray-700">Religion</label>
+                            <input type="text" id="religion" value="Hindu" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" value="ranchoe.doe@ex.com" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                            <input type="tel" id="phone" value="(123) 456-7890" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-1">
+                        </div>
+                    </form>
+                    <button id="save-demographics" class="mt-6 bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-blue-700 transition duration-300">
+                        Save
+                    </button>
+                    <div id="save-message" class="mt-4 text-sm text-center font-medium"></div>
+                </div>
 
         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow duration-300">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Consent History</h2>
