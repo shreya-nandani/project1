@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #6A0572;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -43,7 +43,7 @@
             max-width: 1200px;
         }
         .card {
-            background-color: white;
+            background-color: #9B59B6;
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 25px;
@@ -71,7 +71,8 @@
             cursor: pointer;
             text-align: center;
             color: #555;
-            font-size: 14px;
+            font-size: 17px;
+            font-style: bold;
         }
         .specialty-btn-circle {
             width: 80px;
@@ -104,7 +105,7 @@
             width: 100%;
             padding: 12px;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            border: 1px solid #007BFF;
             box-sizing: border-box;
         }
         .booking-confirm {
@@ -126,6 +127,12 @@
             margin-top: 20px;
             font-size: 12px;
             color: #666;
+            text-align: center;
+        }
+        .confirmation-message {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
             text-align: center;
         }
     </style>
@@ -206,7 +213,7 @@
 
         <div class="card booking-card">
             <h2>Book Your Appointment Slot</h2>
-            <form class="booking-form">
+            <form id="booking-form" class="booking-form">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -242,10 +249,31 @@
                     <button type="submit" class="pay-btn">Book & Pay Rs.100</button>
                 </div>
             </form>
+            <div id="confirmation-message" class="confirmation-message"></div>
             <div class="terms">
                 <p>By clicking "Book & Pay," you agree to our <a href="#">Terms and Conditions</a>.</p>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents the form from submitting in the traditional way
+
+            // Get a random number to simulate the patient's queue number
+            const patientNumber = Math.floor(Math.random() * 50) + 1; // Generates a number between 1 and 50
+            const totalPatients = 50; 
+
+            // Get the name from the input field
+            const name = document.getElementById('name').value;
+
+            // Display the confirmation message
+            const confirmationMessage = document.getElementById('confirmation-message');
+            confirmationMessage.innerHTML = `Thank you, <span style="font-weight: bold; color: #007BFF;">${name}</span>! Your appointment has been booked. You are **No. ${patientNumber}** out of **${totalPatients}** patients in the queue.`;
+
+            // Clear the form fields after submission
+            this.reset();
+        });
+    </script>
 </body>
 </html>
