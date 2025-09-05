@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #6A0572;
+            background-color: #6A0572; /* Changed body background color */
             margin: 0;
             padding: 20px;
             display: flex;
@@ -43,7 +43,7 @@
             max-width: 1200px;
         }
         .card {
-            background-color: #9B59B6;
+            background-color: #9B59B6; /* Changed card background color */
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 25px;
@@ -105,7 +105,7 @@
             width: 100%;
             padding: 12px;
             border-radius: 8px;
-            border: 1px solid #007BFF;
+            border: 1px solid #007BFF; /* Blue outline added here */
             box-sizing: border-box;
         }
         .booking-confirm {
@@ -235,6 +235,23 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="hospital">Choose Hospital</label>
+                    <select id="hospital" name="hospital" required>
+                        <option value="" disabled selected>Select a hospital</option>
+                        <option value="City General Hospital">City General Hospital</option>
+                        <option value="Metropolitan Medical Center">Metropolitan Medical Center</option>
+                        <option value="Community Health Clinic">Community Health Clinic</option>
+                        <option value="Pioneer Healthcare">Pioneer Healthcare</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctor">Choose Doctor</label>
+                    <select id="doctor" name="doctor" required>
+                        <option value="" disabled selected>Select a doctor</option>
+                        </select>
+                </div>
+                
+                <div class="form-group">
                     <label for="location">Location</label>
                     <select id="location" name="location" required>
                         <option value="" disabled selected>Select a location</option>
@@ -257,22 +274,103 @@
     </div>
 
     <script>
+        // --- Hospital and Doctor Selection Logic ---
+        const hospitalSelect = document.getElementById('hospital');
+        const doctorSelect = document.getElementById('doctor');
+        const specialtySelect = document.getElementById('specialty'); // Also consider specialty for doctor selection
+
+        const doctorOptions = {
+            'City General Hospital': {
+                'Neurologist': ['Dr. Anya Sharma', 'Dr. Rohan Kapoor'],
+                'Orthopedics': ['Dr. Vikram Singh', 'Dr. Priya Mehta'],
+                'Dermatologist': ['Dr. Sameer Patel']
+            },
+            'Metropolitan Medical Center': {
+                'Cardiologist': ['Dr. Anjali Rao', 'Dr. Suresh Kumar'],
+                'Pediatrician': ['Dr. Pooja Desai'],
+                'Neurologist': ['Dr. Alok Verma']
+            },
+            'Community Health Clinic': {
+                'General Physician': ['Dr. Kavita Joshi', 'Dr. Rajesh Iyer'], // Example for general
+                'Dermatologist': ['Dr. Neha Gupta']
+            },
+            'Pioneer Healthcare': {
+                'Oncologist': ['Dr. Arvind Reddy'],
+                'Gynecologist': ['Dr. Swati Bose', 'Dr. Preeti Agarwal'],
+                'ENT Specialist': ['Dr. Manish Sharma']
+            }
+        };
+
+        // Function to update doctor options based on hospital and specialty
+        function updateDoctorOptions() {
+            const selectedHospital = hospitalSelect.value;
+            const selectedSpecialty = specialtySelect.value;
+            doctorSelect.innerHTML = '<option value="" disabled selected>Select a doctor</option>'; // Reset doctor options
+
+            if (selectedHospital && doctorOptions[selectedHospital]) {
+                const specialtyDoctors = doctorOptions[selectedHospital];
+                
+                // Filter doctors by selected specialty if a specialty is chosen
+                let doctorsToDisplay = [];
+                if (selectedSpecialty && specialtyDoctors[selectedSpecialty]) {
+                    doctorsToDisplay = specialtyDoctors[selectedSpecialty];
+                } else if (selectedSpecialty && selectedSpecialty === 'General Physician' && specialtyDoctors['General Physician']) { // Handle if 'General Physician' is an option
+                    doctorsToDisplay = specialtyDoctors['General Physician'];
+                } else {
+                    // If no specific specialty selected or specialty not found, show all doctors for that hospital
+                    // Or you might want to show a default message or no doctors
+                    // For now, let's show all if no specialty matches
+                    for (const specialty in specialtyDoctors) {
+                        doctorsToDisplay = doctorsToDisplay.concat(specialtyDoctors[specialty]);
+                    }
+                    // Remove duplicates if any
+                    doctorsToDisplay = [...new Set(doctorsToDisplay)];
+                }
+
+                doctorsToDisplay.forEach(doctor => {
+                    const option = document.createElement('option');
+                    option.value = doctor;
+                    option.textContent = doctor;
+                    doctorSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Event listeners for changes in hospital, specialty
+        hospitalSelect.addEventListener('change', updateDoctorOptions);
+        specialtySelect.addEventListener('change', updateDoctorOptions);
+        
+        // Initial call to populate doctors if a hospital is pre-selected (though not in this initial state)
+        // updateDoctorOptions(); // Uncomment if you want to pre-fill based on defaults
+
+        // --- Booking Form Submission Logic ---
         document.getElementById('booking-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevents the form from submitting in the traditional way
+
+            const nameInput = document.getElementById('name');
+            const specialtyInput = document.getElementById('specialty');
+            const hospitalInput = document.getElementById('hospital');
+            const doctorInput = document.getElementById('doctor');
+            const locationInput = document.getElementById('location');
+
+            // Basic validation to ensure required fields are filled
+            if (!nameInput.value || !specialtyInput.value || !hospitalInput.value || !doctorInput.value || !locationInput.value) {
+                alert("Please fill in all required fields.");
+                return; // Stop the function if validation fails
+            }
 
             // Get a random number to simulate the patient's queue number
             const patientNumber = Math.floor(Math.random() * 50) + 1; // Generates a number between 1 and 50
             const totalPatients = 50; 
 
-            // Get the name from the input field
-            const name = document.getElementById('name').value;
-
             // Display the confirmation message
             const confirmationMessage = document.getElementById('confirmation-message');
-            confirmationMessage.innerHTML = `Thank you, <span style="font-weight: bold; color: #007BFF;">${name}</span>! Your appointment has been booked. You are **No. ${patientNumber}** out of **${totalPatients}** patients in the queue.`;
+            confirmationMessage.innerHTML = `Thank you, <span style="font-weight: bold; color: #007BFF;">${nameInput.value}</span>! Your appointment has been booked with ${doctorInput.value} at ${hospitalInput.value}. You are **No. ${patientNumber}** out of **${totalPatients}** patients in the queue.`;
 
             // Clear the form fields after submission
             this.reset();
+            // Reset doctor dropdown to default placeholder after reset
+            doctorSelect.innerHTML = '<option value="" disabled selected>Select a doctor</option>';
         });
     </script>
 </body>
