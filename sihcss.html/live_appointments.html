@@ -3,178 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Appointment</title>
-    <link rel="stylesheet" href="">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Live Appointment Booking</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            background-attachment: fixed;
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .specialty-button {
-            transition: all 0.3s ease;
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
-        .specialty-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        .login-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            flex: 1;
+            min-width: 300px;
+        }
+        .specialty-card h2, .booking-card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .specialty-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+        }
+        .specialty-btn-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .specialty-btn-circle img {
+            width: 60px;
+            height: 60px;
+        }
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .booking-confirm {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pay-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .terms {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
         }
     </style>
 </head>
-<body class="p-6">
-
-    <div class="max-w-7xl mx-auto">
-        <header class="text-center py-8">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">Find a Specialist</h1>
-            <p class="text-lg text-gray-600">Explore our list of specialties and book your appointment with ease.</p>
-        </header>
-
-        <!-- Specialties Section -->
-        <section class="bg-white rounded-xl shadow-lg p-8 mb-10">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Specialities</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-                <!-- Cardiology -->
-                <button class="specialty-button w-full flex flex-col items-center p-4 bg-red-100 rounded-xl hover:bg-red-200" data-specialty="Cardiology">
-                    <svg class="h-16 w-16 text-red-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.89 0-2.79 1.45-3.84 3.29c-1.05-1.84-1.95-3.29-3.84-3.29A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-gray-800">Cardiology</span>
+<body>
+     <a href="lohgin.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-200 transition duration-300 shadow-sm">
+    <div class="header">
+        <button class="login-btn">Log in or Sign in</button>
+    </div>
+    </a>
+    
+    <div class="main-container">
+        <div class="card specialty-card">
+            <h2>Doctor Specialties</h2>
+            <div class="specialty-grid">
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Neurologist Icon">
+                    </div>
+                    <span>Neurologist</span>
                 </button>
-                <!-- Nephrology -->
-                <button class="specialty-button w-full flex flex-col items-center p-4 bg-blue-100 rounded-xl hover:bg-blue-200" data-specialty="Nephrology">
-                    <svg class="h-16 w-16 text-blue-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 13a6 6 0 0 1-6 6H6" />
-                        <path d="M20 9a6 6 0 0 1-6-6H6" />
-                        <path d="M22 6c-3 0-5.5 1.5-7.5 4.5" />
-                        <path d="M15.5 10.5C13.5 13.5 11 15 8 15" />
-                        <path d="M12 22s-2-2-3-4" />
-                        <path d="M6 2s-2 2-3 4" />
-                        <path d="m14 10-3 3.5" />
-                    </svg>
-                    <span class="text-sm font-semibold text-gray-800">Nephrology</span>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Orthopedics Icon">
+                    </div>
+                    <span>Orthopedics</span>
                 </button>
-                <!-- Neurology -->
-                <button class="specialty-button w-full flex flex-col items-center p-4 bg-purple-100 rounded-xl hover:bg-purple-200" data-specialty="Neurology">
-                    <svg class="h-16 w-16 text-purple-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 21a9 9 0 0 0 9-9c0-6.2-4-9-9-9s-9 2.8-9 9a9 9 0 0 0 9 9Z" />
-                        <path d="M12 3a7.2 7.2 0 0 0-7.2 7.2c0 5.4 3.7 7.7 7.2 7.7s7.2-2.3 7.2-7.7A7.2 7.2 0 0 0 12 3Z" />
-                        <path d="M12 10V6" />
-                        <path d="M15 11.5L12 15" />
-                        <path d="M9 11.5L12 15" />
-                    </svg>
-                    <span class="text-sm font-semibold text-gray-800">Neurology</span>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Dermatologist Icon">
+                    </div>
+                    <span>Dermatologist</span>
                 </button>
-                <!-- Pulmonology -->
-                <button class="specialty-button w-full flex flex-col items-center p-4 bg-green-100 rounded-xl hover:bg-green-200" data-specialty="Pulmonology">
-                    <svg class="h-16 w-16 text-green-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 13a4 4 0 0 0-4-4H9.5a2 2 0 0 1-2-2a2 2 0 0 1 4-4a2 2 0 0 1-4 4" />
-                        <path d="M19 13a4 4 0 0 0-4-4H9.5a2 2 0 0 0-2-2" />
-                        <path d="M15 17a4 4 0 0 0-4-4H9.5a2 2 0 0 1-2-2a2 2 0 0 1 4-4a2 2 0 0 1-4 4" />
-                        <path d="M19 17a4 4 0 0 0-4-4H9.5a2 2 0 0 0-2-2" />
-                    </svg>
-                    <span class="text-sm font-semibold text-gray-800">Pulmonology</span>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Cardiologist Icon">
+                    </div>
+                    <span>Cardiologist</span>
                 </button>
-                <!-- Orthopedics -->
-                <button class="specialty-button w-full flex flex-col items-center p-4 bg-yellow-100 rounded-xl hover:bg-yellow-200" data-specialty="Orthopedics">
-                    <svg class="h-16 w-16 text-yellow-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M8 12l2 2 4-4" />
-                        <path d="M18 10h-2" />
-                        <path d="M15 18v-2" />
-                        <path d="M10 6v-2" />
-                        <path d="M6 14v2" />
-                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-                        <path d="M18 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-                        <path d="M6 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-                        <path d="M12 18a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-gray-800">Orthopedics</span>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Pediatrician Icon">
+                    </div>
+                    <span>Pediatrician</span>
                 </button>
-                <!-- Dermatology -->
-                <button class="specialty-button w-full flex flex-col items-center p-4 bg-pink-100 rounded-xl hover:bg-pink-200" data-specialty="Dermatology">
-                    <svg class="h-16 w-16 text-pink-500 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2c-3.314 0-6 2.686-6 6s2.686 6 6 6s6-2.686 6-6s-2.686-6-6-6z" />
-                        <path d="M12 14c-3.314 0-6 2.686-6 6s2.686 6 6 6s6-2.686 6-6s-2.686-6-6-6z" />
-                        <path d="M12 14c3.314 0 6 2.686 6 6s-2.686 6-6 6s-6-2.686-6-6s2.686-6 6-6z" />
-                        <path d="M12 2v20" />
-                        <path d="M2 12h20" />
-                        <path d="M12 21c-3.314 0-6-2.686-6-6s2.686-6 6-6s6 2.686 6 6s-2.686 6-6 6z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-gray-800">Dermatology</span>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Oncologist Icon">
+                    </div>
+                    <span>Oncologist</span>
+                </button>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Gynecologist Icon">
+                    </div>
+                    <span>Gynecologist</span>
+                </button>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="ENT Specialist Icon">
+                    </div>
+                    <span>ENT Specialist</span>
+                </button>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Dentist Icon">
+                    </div>
+                    <span>Dentist</span>
+                </button>
+                <button class="specialty-btn">
+                    <div class="specialty-btn-circle">
+                        <img src="https://via.placeholder.com/60" alt="Urologist Icon">
+                    </div>
+                    <span>Urologist</span>
                 </button>
             </div>
-        </section>
+        </div>
 
-        <!-- Appointment Bar -->
-        <section class="bg-white rounded-xl shadow-lg p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Explore Your Dr,here:</h2>
-            <form id="appointment-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
-                <!-- Step 1: Speciality -->
-                <div>
-                    <label for="specialty" class="block text-gray-700 font-medium mb-2">1. Choose a Speciality</label>
-                    <input type="text" id="specialty" name="specialty" placeholder="e.g., Cardiology" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+        <div class="card booking-card">
+            <h2>Book Your Appointment Slot</h2>
+            <form class="booking-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 </div>
-
-                <!-- Step 2: Date -->
-                <div>
-                    <label for="date" class="block text-gray-700 font-medium mb-2">2. Select Date</label>
-                    <div class="relative">
-                        <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
-                    </div>
+                <div class="form-group">
+                    <label for="specialty">Choose Specialty</label>
+                    <select id="specialty" name="specialty" required>
+                        <option value="" disabled selected>Select a specialty</option>
+                        <option value="Neurologist">Neurologist</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Dermatologist">Dermatologist</option>
+                        <option value="Cardiologist">Cardiologist</option>
+                        <option value="Pediatrician">Pediatrician</option>
+                        <option value="Oncologist">Oncologist</option>
+                        <option value="Gynecologist">Gynecologist</option>
+                        <option value="ENT Specialist">ENT Specialist</option>
+                        <option value="Dentist">Dentist</option>
+                        <option value="Urologist">Urologist</option>
+                    </select>
                 </div>
-
-                <!-- Step 3: Location -->
-                <div>
-                    <label for="location" class="block text-gray-700 font-medium mb-2">3. Enter Location</label>
-                    <input type="text" id="location" name="location" placeholder="e.g., Patna" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location" required>
+                        <option value="" disabled selected>Select a location</option>
+                        <option value="New Delhi">New Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Kolkata">Kolkata</option>
+                    </select>
                 </div>
-                
-                <!-- Submit Button -->
-                <div class="md:col-span-2 lg:col-span-1">
-                    <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-                        Search Doctors
-                    </button>
+                <div class="booking-confirm">
+                    <button type="submit" class="pay-btn">Book & Pay Rs.100</button>
                 </div>
             </form>
-        </section>
+            <div class="terms">
+                <p>By clicking "Book & Pay," you agree to our <a href="#">Terms and Conditions</a>.</p>
+            </div>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const specialtyButtons = document.querySelectorAll('.specialty-button');
-            const specialtyInput = document.getElementById('specialty');
-            const form = document.getElementById('appointment-form');
-
-            specialtyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const specialty = button.dataset.specialty;
-                    specialtyInput.value = specialty;
-                });
-            });
-
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-                console.log('Form submitted with data:', data);
-                
-                // Here you would typically send this data to a server
-                // and handle the search results.
-                alert("Searching for doctors with the following criteria:\n" +
-                      "Specialty: " + data.specialty + "\n" +
-                      "Date: " + data.date + "\n" +
-                      "Location: " + data.location);
-            });
-
-            // Prevent the alert from being triggered in this environment.
-            if (typeof window.alert !== 'undefined') {
-                window.alert = function(message) {
-                    console.log('ALERT:', message);
-                };
-            }
-        });
-    </script>
 </body>
 </html>
