@@ -1,0 +1,197 @@
+/* Import Inter (kept consistent) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(0,160,255,0.18);
+  --accent-blue: #00b7ff;
+  --baby-pink: #ff8fb3;
+}
+
+html,body { height:100%; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #163a5a, #0f6b6a); /* deeper blue-green */
+  background-attachment: fixed;
+  color: #ffffff;
+}
+.glow-text {
+      text-shadow: 0 0 18px rgba(0,210,255,0.28), 0 0 38px rgba(0,140,255,0.12);
+}
+
+
+/* container look */
+.glass-bg {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(2,6,23,0.6);
+  padding: 28px;
+}
+
+/* HealX title (glow + heartbeat) */
+.healx {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #bfefff;
+  text-shadow: 0 0 10px rgba(0,200,255,0.18);
+  animation: healx-glow 2.4s ease-in-out infinite alternate;
+}
+.heart-emoji {
+  display:inline-block;
+  margin-left:6px;
+  color: var(--baby-pink);
+  font-size:1.15rem;
+  transform-origin:center;
+  animation: heartbeat 1.2s infinite;
+}
+
+/* gentle glow animation for HealX */
+@keyframes healx-glow {
+  from { text-shadow: 0 0 6px rgba(0,200,255,0.12), 0 0 18px rgba(0,140,255,0.08); }
+  to   { text-shadow: 0 0 18px rgba(0,210,255,0.28), 0 0 38px rgba(0,140,255,0.12); }
+}
+
+/* heartbeat */
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); opacity:0.95; }
+  40% { transform: scale(1.18); opacity:1; }
+  70% { transform: scale(0.98); }
+}
+
+/* LIVE card styling (glassmorphic) */
+/* LIVE card styling (light peach / white glassmorphic) */
+.live-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.5));
+  border: 1px solid rgba(255, 200, 150, 0.6);
+  backdrop-filter: blur(10px) saturate(140%);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(1,8,25,0.25);
+  overflow: visible;
+}
+
+/* Consent History & Family History → white cards */
+.white-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #1f2937; /* dark slate text */
+}
+.white-card h2 {
+  color: #0f2a27;
+}
+.white-card ul li {
+  color: #374151;
+}
+
+/* Emergency Contact → white with red outline */
+.emergency-card {
+  background: #ffffff;
+  border: 2px solid #e11d48; /* vivid red outline */
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(225,29,72,0.15);
+}
+.emergency-card h2 {
+  color: #b91c1c; /* dark red */
+}
+.emergency-card p {
+  color: #374151;
+}
+
+/* Sidebar quick links → white cards */
+.sidebar-link {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  color: #1f2937;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.sidebar-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+.sidebar-link span {
+  color: #111827;
+}
+
+/* live title with baby-pink glow + beat */
+.live-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffeef7;
+  position: relative;
+  display: inline-block;
+  padding-right: 8px;
+  text-shadow: 0 0 6px rgba(255,143,179,0.16);
+  animation: live-pulse 2s infinite ease-in-out;
+}
+
+/* baby-pink pulse for the Live Update word */
+@keyframes live-pulse {
+  0% { color: #ffd6e3; text-shadow: 0 0 6px rgba(255,143,179,0.12); transform: translateY(0); }
+  40% { color: #ff9bb8; text-shadow: 0 0 16px rgba(255,143,179,0.26); transform: translateY(-1px) scale(1.01); }
+  100% { color: #ffd6e3; text-shadow: 0 0 6px rgba(255,143,179,0.12); transform: translateY(0); }
+}
+
+/* queue badge (top-right visual cluster) */
+.queue-badge {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  position:relative;
+}
+
+/* small white circular label */
+.queue-circle {
+  background: #ffffff;
+  color: #0b2333;
+  border-radius:999px;
+  padding:6px 10px;
+  font-weight:700;
+  font-size:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* blue queue number look */
+.queue-num {
+  background: linear-gradient(90deg,#e6f6ff, #d9f0ff);
+  color: var(--accent-blue);
+  font-weight:800;
+  padding:6px 10px;
+  border-radius:10px;
+  font-size:16px;
+  box-shadow: 0 8px 24px rgba(3,120,255,0.12);
+}
+
+/* form inputs in live card */
+.info-input {
+  width:100%;
+  padding:10px 12px;
+  margin-top:6px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color:#1f1414;
+  border-radius:10px;
+  font-weight:600;
+}
+
+/* small explanatory text */
+.text-slate-200 { color: #d7eefc; }
+
+/* canvas container sizing responsive */
+#liveChart { width:100% !important; height:160px !important; display:block; }
+
+/* subtle accent button */
+.bg-gradient-admin { background: linear-gradient(135deg,#667eea,#764ba2); }
+
+/* generic states */
+a { text-decoration:none; }
+
+/* small screens adjustments */
+@media (max-width:768px){
+  .healx { font-size:2rem; }
+  .live-title { font-size:1.3rem; }
+}

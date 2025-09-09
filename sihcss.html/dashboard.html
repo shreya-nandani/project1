@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HealX - Patient Dashboard (Live Updates)</title>
+
+  <!-- Tailwind (kept as in your original) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Link to custom styles -->
+  <link rel="dasboardsheet" href="dasboard.css" />
+</head>
+<body class="p-6 bg-fixed">
+
+  <!-- Small fixed Admin button in corner -->
+  <button id="adminBtn" class="fixed top-4 right-4 bg-gradient-admin text-white py-1.5 px-3 rounded-full shadow-md hover:scale-105 text-sm z-40">
+    Admin
+  </button>
+
+  <!-- HealX Header / Branding -->
+  <div class="max-w-6xl mx-auto text-center mb-8">
+    <h1 class="healx inline-flex items-center justify-center">
+      HealX
+      <span class="heart-emoji ml-2">❤</span>
+    </h1>
+    <p class="text-gray-200 mt-2 moto">Helping people, Saving lives</p>
+    
+  </div>
+
+  <!-- Main container (slightly refactored from your original layout) -->
+  <div class="max-w-7xl mx-auto rounded-xl p-8 space-y-8 glass-bg">
+
+    <!-- Header contains logo, search and AI assistant (kept similar to original) -->
+    <header class="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0 md:space-x-4">
+      <div class="flex items-center flex-shrink-0">
+        <img src="healx.png" alt="HealX Logo" class="h-12 md:h-20 mr-4 md:mr-8">
+        <h2 id="patient-name" class="text-lg md:text-2xl font-bold text-white">HealX Dashboard</h2>
+      </div>
+
+      <div class="w-full max-w-lg relative flex-grow">
+  <input id="searchInput" 
+         type="text" 
+         placeholder="Search..." 
+         class="w-full pl-10 pr-3 py-2 rounded-full border 
+                border-gray-300 focus:outline-none focus:ring-2 
+                focus:ring-blue-300 transition duration-300 
+                bg-white text-gray-800">
+                
+  <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" 
+       xmlns="http://www.w3.org/2000/svg" fill="none" 
+       viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M21 21l-5-5m2-6a7 7 0 11-14 0 7 7 0 0114 0z"/>
+  </svg>
+</div>
+
+
+      <button id="aiBtn" class="bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-semibold py-2 px-5 rounded-full shadow-md hover:scale-105 transition flex items-center space-x-2">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+          <path d="M8 12h8M12 8v8" stroke="white" stroke-width="2"/>
+        </svg>
+        <span class="hidden md:inline">AI Assistant</span>
+      </button>
+    </header>
+
+    <!-- Main Grid: Left / Right (left contains Live Update + other cards) -->
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- LEFT: now contains Live Update (replaces Demographic Profile) + other info -->
+      <div class="md:col-span-2 space-y-6">
+
+        <!-- LIVE UPDATE CARD (glassmorphic, baby-pink glowing title, queue badge) -->
+        <section class="live-card relative overflow-visible">
+          <!-- Top-left title -->
+          <div class="mb-4 flex items-center justify-between">
+            <h3 class="live-title">Live Update</h3>
+
+            <!-- small white circular badge (corner) with Queue No. -->
+            <div class="queue-badge">
+              <div class="queue-circle">Queue</div>
+              <div id="queueNumber" class="queue-num">8<span class="slash">/</span><span class="max">10</span></div>
+            </div>
+          </div>
+
+          <!-- Content: Booking details + approx timing graph -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+            <!-- Booking info -->
+            <div class="col-span-1 md:col-span-1">
+              <label class="text-sm text-slate-100">Booking ID</label>
+              <input id="bookingId" readonly class="info-input" value="BK-20250908-0459">
+
+              <label class="text-sm text-slate-100 mt-3">Slot</label>
+              <input id="slot" readonly class="info-input" value="10:30 AM - 10:45 AM">
+
+              <label class="text-sm text-slate-100 mt-3">Name</label>
+              <input id="patientNameLive" readonly class="info-input" value="Ranchor Das">
+
+              <button id="refreshLive" class="mt-4 w-full py-2 rounded-full font-semibold text-white bg-gradient-to-r from-pink-500 to-pink-400 hover:from-pink-400 hover:to-pink-500 transition-all">
+                Refresh Live
+              </button>
+            </div>
+
+            <!-- Graph / Analytics area -->
+            <div class="col-span-1 md:col-span-2">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm text-slate-200">Approx. Timing (mins)</p>
+                  <p class="text-xs text-slate-300">Estimated wait / processing time across upcoming slots</p>
+                </div>
+                <div class="text-right text-sm text-slate-200 pr-2">Updated: <span id="liveTime">now</span></div>
+              </div>
+
+              <div class="mt-3 bg-white/6 rounded-lg p-3">
+                <canvas id="liveChart" width="600" height="180"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONSENT HISTORY -->
+        <div class="bg-white rounded-xl p-6 border border-gray-200">
+       <h2 class="text-xl font-semibold text-black mb-4">Check-up History</h2>
+       <ul class="list-disc list-inside text-slate-700 space-y-2">
+        <li>Consent for treatment signed on 10/25/2023.</li>
+        <li>Symptoms found - hard to swallow, pain in neck, fever.</li>
+        <li>Medicine given - Antibiotic drma, Syrupx</li>
+      </ul>
+       </div>
+
+
+        <!-- FAMILY HISTORY -->
+        <div class="bg-white rounded-xl p-6 border border-gray-200">
+          <h2 class="text-xl font-semibold text-black mb-4">Family History</h2>
+             <ul class="list-disc list-inside text-slate-700 space-y-2">
+              <li><strong>Mother:</strong> History of hypertension.</li>
+              <li><strong>Father:</strong> No significant history reported.</li>
+             </ul>
+         </div>
+
+        <!-- EMERGENCY CONTACT -->
+        <div class="bg-rose-900/10 rounded-xl p-6 border-l-4 border-rose-500">
+          <h2 class="text-xl font-semibold text-rose-200 mb-4">Emergency Contact</h2>
+          <div class="flex items-center space-x-4">
+            <div class="flex-grow">
+              <p class="font-medium text-white">Rashi Das (wife)</p>
+              <p class="text-slate-300">Phone: (987) 654-3210</p>
+            </div>
+            <button class="bg-rose-600 text-white font-semibold py-2 px-4 rounded-full shadow hover:scale-105 transition">Call Now</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: sidebar preserved (links / quick actions) -->
+     <div class="md:col-span-1 bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
+  <div class="space-y-4">
+    <a href="live_appointments.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-emerald-200 hover:bg-emerald-300 transition border border-emerald-300">
+      <svg class="h-6 w-6 text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14"/>
+      </svg>
+     <span class="font-medium text-gray-900">Live Appointments</span>
+    </a>
+
+    <a href="hospitals_near_me.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-emerald-200 hover:bg-gray-100 transition border border-gray-200">
+      <svg class="h-6 w-6 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+      <span class="font-medium text-gray-800">Hospitals Near Me</span>
+    </a>
+    <a href="med_box.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-emerald-200 hover:bg-gray-100 transition border border-gray-200">
+      <svg class="h-6 w-6 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="8" y="5" width="8" height="14" rx="2"/><path d="M12 9v6"/></svg>
+      <span class="font-medium text-gray-800">Medicine Bar</span>
+    </a>
+    <a href="guide_bar.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-emerald-200 hover:bg-gray-100 transition border border-gray-200">
+      <svg class="h-6 w-6 text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span class="font-medium text-gray-800">Guidelines</span>
+    </a>
+    <a href="visit_alarm.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-emerald-200 hover:bg-gray-100 transition border border-gray-200">
+      <svg class="h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M2 13v-3h20v3"/></svg>
+      <span class="font-medium text-gray-800">Visit Note</span>
+    </a>
+    <a href="feedback_reward.html" target="_blank" class="w-full flex items-center justify-start space-x-4 p-4 rounded-lg bg-emerald-200 hover:bg-gray-100 transition border border-gray-200">
+      <svg class="h-6 w-6 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M11.049 2.927c.365-.89 1.547-.89 1.912 0l2.36 5.764"/></svg>
+      <span class="font-medium text-gray-800">Reviews</span>
+    </a>
+  </div>
+</div>
+
+    </main>
+  </div>
+
+  <!-- Link to JS -->
+  <script src="dasboard.js"></script>
+</body>
+</html>
