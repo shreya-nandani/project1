@@ -1,172 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Review & Reward</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #d4fc79, #96e6a1);
-      min-height: 100vh;
-      padding: 20px;
-    }
-    h1 {
-      letter-spacing: 1px;
-    }
-    .card {
-      border-radius: 1.2rem;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      padding: 20px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-    }
-    .floating-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #43cea2, #185a9d);
-      color: white;
-      padding: 16px;
-      border-radius: 1rem;
-      width: 220px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    }
-    .floating-widget h2 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .token {
-      background: #fff;
-      color: #185a9d;
-      padding: 4px 8px;
-      border-radius: 8px;
-      display: inline-block;
-      margin: 3px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    textarea { resize: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealX - Find Your Doctor</title>
+    <link rel="stylesheet" href="findmydr.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F7C762'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
 </head>
 <body>
+    <div class="overlay" aria-hidden="true"></div>
 
-  <!-- Title -->
-  <h1 class="text-4xl font-bold text-center text-gray-800 mt-4">🏥 Doctor Review & Reward</h1>
-  <p class="text-center text-gray-700 text-lg mb-10 italic">“Your feedback builds healthier connections between doctors and patients.”</p>
+    <header class="app-header">
+        <h1 class="main-heading">"Your Doctor, A Click Away"</h1>
+    </header>
 
-  <!-- Review Form -->
-  <div class="card bg-gradient-to-br from-blue-100 to-blue-200 max-w-6xl mx-auto">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">📝 Submit a Review</h2>
-    <form id="reviewForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <div>
-        <label class="block font-medium">Doctor's Name</label>
-        <input type="text" id="doctorName" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-      </div>
-      
-      <div>
-        <label class="block font-medium">Hospital Name</label>
-        <input type="text" id="hospitalName" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-      </div>
-      
-      <div>
-        <label class="block font-medium">Doctor's Behavior</label>
-        <select id="behavior" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-          <option value="">Rate...</option>
-          <option>⭐</option><option>⭐⭐</option><option>⭐⭐⭐</option><option>⭐⭐⭐⭐</option><option>⭐⭐⭐⭐⭐</option>
-        </select>
-      </div>
+    <main class="container">
+        <section class="selection-box" aria-labelledby="selection-heading">
+            <h2 id="selection-heading" class="visually-hidden">Find a Doctor</h2>
+            
+            <div class="selectors">
+                <label for="citySelect" class="sr-only">Select Location</label>
+                <select id="citySelect" aria-required="true">
+                    <option value="" disabled selected>Select Your City</option>
+                    <option value="patna">Patna</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="bbsr">Bhubaneswar</option>
+                </select>
+                 
+               
+                <label for="hospitalSelect" class="sr-only">Select Hospital</label>
+                <select id="hospitalSelect" disabled aria-required="true">
+                    <option value="" disabled selected>Select Hospital</option>
+                </select>
 
-      <div>
-        <label class="block font-medium">Hospital Services</label>
-        <select id="services" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-          <option value="">Rate...</option>
-          <option>⭐</option><option>⭐⭐</option><option>⭐⭐⭐</option><option>⭐⭐⭐⭐</option><option>⭐⭐⭐⭐⭐</option>
-        </select>
-      </div>
+                <label for="deptSelect" class="sr-only">Select Department</label>
+                <select id="deptSelect" aria-required="true">
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="ent">ENT</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                </select>
+            </div>
 
-      <div>
-        <label class="block font-medium">Fee Structure</label>
-        <select id="fees" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-          <option value="">Rate...</option>
-          <option>⭐</option><option>⭐⭐</option><option>⭐⭐⭐</option><option>⭐⭐⭐⭐</option><option>⭐⭐⭐⭐⭐</option>
-        </select>
-      </div>
+            <button id="submitBtn" class="btn btn-primary" aria-live="polite">Find Doctors</button>
+            <div id="errorMessage" class="error-message" role="alert" aria-live="assertive"></div>
+        </section>
 
-      <div>
-        <label class="block font-medium">Doctor Interaction</label>
-        <select id="interaction" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-          <option value="">Rate...</option>
-          <option>⭐</option><option>⭐⭐</option><option>⭐⭐⭐</option><option>⭐⭐⭐⭐</option><option>⭐⭐⭐⭐⭐</option>
-        </select>
-      </div>
+        <section id="doctorResults" class="doctor-results hidden" aria-labelledby="results-heading">
+            <h2 id="results-heading">Available Doctors</h2>
+            <div class="doctor-list" id="doctorList">
+                <p class="no-results-message hidden" id="noResultsMessage">No doctors found matching your criteria.</p>
+            </div>
+            <button id="clearSearchBtn" class="btn btn-secondary hidden">Clear Search</button>
+        </section>
+    </main>
 
-      <div class="md:col-span-2 lg:col-span-3">
-        <label class="block font-medium">Additional Feedback (Optional)</label>
-        <textarea id="feedback" rows="3" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400"></textarea>
-      </div>
+    <footer class="healx-footer-logo">
+        <div class="logo-container">
+            <svg class="healx-logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM13 17h-2v-6h2v6zM13 9h-2V7h2v2z" fill="#F7C762"/>
+            </svg>
+            <span class="healx-logo-text">HealX</span>
+        </div>
+        <p class="healx-tagline">Your hope for a better today, tomorrow, and forever</p>
+    </footer>
 
-      <div class="md:col-span-2 lg:col-span-3">
-        <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-          Submit Review
-        </button>
-      </div>
-
-    </form>
-  </div>
-
-  <!-- Floating Token Widget -->
-  <div class="floating-widget">
-    <h2>🎟️ Token Bank</h2>
-    <p class="text-sm">Earn 1 token per doctor review. <br>Every 5 tokens = 🎖️ Free Checkup!</p>
-    <div id="tokens" class="my-2"></div>
-    <div id="rewardMsg" class="text-sm font-medium"></div>
-  </div>
-
-  <script>
-    const form = document.getElementById('reviewForm');
-    const tokensDiv = document.getElementById('tokens');
-    const rewardMsg = document.getElementById('rewardMsg');
-
-    let reviewedDoctors = new Set(); 
-    let tokens = 0;
-    let rewards = 0;
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const doctorName = document.getElementById('doctorName').value.trim();
-      if (reviewedDoctors.has(doctorName)) {
-        alert("⚠️ You already reviewed this doctor!");
-        return;
-      }
-
-      reviewedDoctors.add(doctorName);
-      tokens++;
-      
-      // Show token
-      const tokenEl = document.createElement("span");
-      tokenEl.className = "token";
-      tokenEl.innerText = "Token " + tokens;
-      tokensDiv.appendChild(tokenEl);
-
-      // Reward system
-      if (tokens % 5 === 0) {
-        rewards++;
-        rewardMsg.innerHTML = `🎉 Badge Earned! Free Checkup #${rewards}`;
-      } else {
-        rewardMsg.innerHTML = `⭐ Keep going! ${5 - (tokens % 5)} more for next badge.`;
-      }
-
-      form.reset();
-    });
-  </script>
+    <script src="findmydr.js"></script>
 </body>
 </html>

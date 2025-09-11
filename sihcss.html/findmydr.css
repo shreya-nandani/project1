@@ -1,0 +1,533 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Color Palette */
+:root {
+    --primary-color: #F7C762; /* Golden Yellow for highlights and buttons */
+    --secondary-color: #5A8F7B; /* Softer Green for secondary actions */
+    --dark-bg: #141E30; /* Midnight Blue - darker */
+    --light-dark-bg: #243B55; /* Darker Blue - lighter */
+    --glass-bg: rgba(255, 255, 255, 0.1); /* Translucent white for glassmorphism */
+    --text-color: #E0E0E0; /* Light Gray for general text */
+    --error-color: #FF6B6B; /* Red for error messages */
+    --select-arrow-color: #F7C762; /* Color for the dropdown arrow */
+
+    /* Border Radii */
+    --border-radius-lg: 20px;
+    --border-radius-md: 15px;
+    --border-radius-sm: 12px;
+
+    /* Transitions */
+    --transition-speed: 0.3s ease;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--dark-bg), var(--light-dark-bg));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+    overflow-x: hidden; /* Prevents horizontal scroll from wavy background */
+    position: relative;
+    padding-bottom: 120px; /* Space for the fixed footer logo */
+    overflow-y: auto;
+}
+
+/* Wavy Background Effect */
+body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(36, 59, 85, 0.3) 0%, rgba(20, 30, 48, 0.0) 70%);
+    transform: rotate(0deg);
+    animation: waveRotate 30s linear infinite;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+@keyframes waveRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Accessibility Helpers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Overlay for backdrop blur */
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(25, 25, 25, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+/* Main Heading at the Top */
+.app-header {
+    margin-top: 50px;
+    text-align: center;
+    z-index: 2;
+    margin-bottom: 40px;
+}
+
+.main-heading {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* Shimmer reflection effect */
+.main-heading {
+  font-size: 2.2rem;
+  font-weight: bold;
+  display: inline-block;
+
+  /* Gradient inside text */
+  background: linear-gradient(
+    120deg,
+    #ffffff 20%,
+    #f7c762 40%,
+    #ffffff 60%
+  );
+  background-size: 200% 100%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* for Firefox */
+
+  animation: shimmerText 2.5s infinite;
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+
+/* Main Content Container */
+.container {
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    z-index: 2;
+}
+
+/* Selection Box (Glassmorphic) */
+.selection-box {
+    background: var(--glass-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: transform var(--transition-speed);
+}
+.selection-box:hover {
+    transform: translateY(-5px);
+}
+
+.selection-box h2 { /* If you decide to un-hide the sub-heading later */
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: white;
+}
+
+.selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 15px;
+}
+
+/* Select Dropdowns */
+select {
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--border-radius-sm);
+    background: rgba(255, 255, 255, 0.15); /* Translucent background */
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    backdrop-filter: blur(8px);
+    -webkit-appearance: none; /* Remove default arrow */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F7C762' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+    transition: border-color var(--transition-speed);
+}
+select:hover, select:focus {
+    border-color: var(--primary-color);
+}
+select option {
+    background: var(--light-dark-bg); /* Darker background for options */
+    color: var(--text-color);
+    padding: 10px;
+}
+select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-image: none;
+}
+
+/* Buttons */
+.btn {
+    padding: 14px 25px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform 0.1s ease, box-shadow var(--transition-speed);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Make buttons full width in selectors */
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    margin-top: 15px; /* Space between last select and primary button */
+}
+.btn-primary:hover {
+    background: #FFD97D; /* Lighter shade on hover */
+    box-shadow: 0 6px 15px rgba(247, 199, 98, 0.4);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+.btn-secondary:hover {
+    background: #6CB59C; /* Lighter shade on hover */
+    box-shadow: 0 6px 15px rgba(90, 143, 123, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.error-message {
+    color: var(--error-color);
+    margin-top: 15px;
+    font-weight: 500;
+    min-height: 20px;
+}
+
+/* Doctor Results Section */
+.doctor-results {
+    width: 100%;
+    text-align: center;
+    transition: opacity var(--transition-speed);
+}
+.doctor-results h2 {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    color: white;
+}
+.doctor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-content: center;
+    gap: 25px;
+    min-height: 100px; /* To prevent layout shift when no doctors are found */
+}
+.doctor-card {
+    background: var(--glass-bg);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    /* Initial state for animation */
+    opacity: 0;
+    transform: translateY(30px);
+}
+.doctor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(247, 199, 98, 0.5);
+    flex-shrink: 0;
+}
+.doctor-card h3 {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 600;
+}
+.doctor-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+.doctor-card p strong {
+    color: var(--primary-color);
+}
+
+.doctor-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.doctor-actions .btn {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    border-radius: var(--border-radius-sm);
+    box-shadow: none;
+    flex-grow: 1;
+    max-width: 150px;
+}
+
+.doctor-actions .btn-tertiary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.doctor-actions .btn-tertiary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--secondary-color);
+}
+
+.no-results-message {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    grid-column: 1 / -1; /* Span across all columns */
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Animation for Doctor Cards */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.doctor-card.animate-in {
+    animation: fadeInSlideUp 0.6s ease-out forwards;
+}
+
+/* Footer Logo (bottom left) */
+.healx-footer-logo {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 4; /* Ensure it's on top */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px; /* Add some padding for visibility */
+    background: rgba(0, 0, 0, 0.3); /* Slightly darker background for contrast */
+    border-radius: var(--border-radius-md);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.healx-footer-logo .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+}
+
+.healx-footer-logo .healx-logo-icon {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0px 0px 6px var(--primary-color));
+}
+
+.healx-footer-logo .healx-logo-text {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0px 0px 15px var(--primary-color);
+    line-height: 1;
+}
+
+.healx-footer-logo .healx-tagline {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    font-weight: 300;
+    margin-left: 38px; /* Indent to align with text */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .app-header {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .main-heading {
+        font-size: 2rem;
+        animation: shimmer 2s forwards;
+
+    }
+    .selection-box {
+        padding: 25px;
+    }
+    .selectors {
+        gap: 12px;
+    }
+    select, .btn {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+    .doctor-results h2 {
+        font-size: 1.5rem;
+    }
+    .doctor-list {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+    .doctor-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .doctor-actions .btn {
+        max-width: none; /* Buttons take full width */
+    }
+
+    .healx-footer-logo {
+        bottom: 15px;
+        left: 15px;
+        padding: 8px 12px;
+    }
+    .healx-footer-logo .healx-logo-icon {
+        width: 25px;
+        height: 25px;
+    }
+    .healx-footer-logo .healx-logo-text {
+        font-size: 1.8rem;
+    }
+    .healx-footer-logo .healx-tagline {
+        font-size: 0.7rem;
+        margin-left: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-heading {
+        font-size: 1.6rem;
+    }
+    .selection-box {
+        padding: 20px;
+    }
+    select, .btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .doctor-card img {
+        width: 70px;
+        height: 70px;
+    }
+    .doctor-card h3 {
+        font-size: 1.1rem;
+    }
+    .doctor-card p {
+        font-size: 0.8rem;
+    }
+
+    .healx-footer-logo {
+        bottom: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        width: calc(100% - 20px); /* Adjust width to fit */
+        align-items: center; /* Center content in footer */
+        text-align: center;
+    }
+    .healx-footer-logo .logo-container {
+        justify-content: center;
+        margin-bottom: 2px;
+    }
+    .healx-footer-logo .healx-logo-text {
+        font-size: 1.5rem;
+    }
+    .healx-footer-logo .healx-tagline {
+        font-size: 0.65rem;
+        margin-left: 0;
+    }
+}
