@@ -2,11 +2,11 @@
 
 // Helper: draw a simple bar-chart on a canvas to show approx timing
 function drawBarChart(canvas, labels, data) {
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const ctx = canvas.getContext('2d');//2d drawing surface
+  ctx.clearRect(0,0,canvas.width,canvas.height);//clear prev charts so redraw works
 
   // padding
-  const padding = 20;
+  const padding = 20;//leaves spacing for labels /grids
   const w = canvas.width - padding*2;
   const h = canvas.height - padding*2;
   const barGap = 12;
@@ -14,32 +14,34 @@ function drawBarChart(canvas, labels, data) {
   const barWidth = (w - (num-1)*barGap) / num;
 
   // find max
-  const max = Math.max(...data, 1);
+  const max = Math.max(...data, 1);//largest data value-ensures bar prportionality ,no % by 0 if all value r 0
+  
+  //ss=faint white subtle grid
 
   // Draw background grid lines
-  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';//horizontal grid line bg 
   ctx.lineWidth = 1;
   ctx.beginPath();
-  for (let i=0;i<=4;i++){
+  for (let i=0;i<=4;i++){//looop runs 5 times
     const y = padding + (h/4)*i;
-    ctx.moveTo(padding, y);
+    ctx.moveTo(padding, y);//move to line to draw grid line across the chrt
     ctx.lineTo(padding + w, y);
   }
-  ctx.stroke();
+  ctx.stroke();//renders them
 
   // Bars
   for (let i=0;i<num;i++){
-    const value = data[i];
-    const x = padding + i*(barWidth + barGap);
-    const barH = (value / max) * (h - 8);
-    const y = padding + (h - barH);
+    const value = data[i];//bar height
+    const x = padding + i*(barWidth + barGap);//x -left posn of bar
+    const barH = (value / max) * (h - 8);//(barh-pixel <>)
+    const y = padding + (h - barH);//top coordn.
 
     // gradient fill - blue to cyan
     const grad = ctx.createLinearGradient(x, y, x, y + barH);
     grad.addColorStop(0, 'rgba(0,183,255,0.95)');
     grad.addColorStop(1, 'rgba(0,120,255,0.8)');
 
-    roundRect(ctx, x, y, barWidth, barH, 6, true, false, grad);
+    roundRect(ctx, x, y, barWidth, barH, 6, true, false, grad);//rR to draw rounded bars
 
     // Label
     ctx.fillStyle = 'rgba(230,247,255,0.9)';

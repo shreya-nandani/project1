@@ -2,14 +2,14 @@
 
 /* Color Palette */
 :root {
-    --primary-color: #F7C762; /* Golden Yellow for highlights and buttons */
-    --secondary-color: #5A8F7B; /* Softer Green for secondary actions */
-    --dark-bg: #141E30; /* Midnight Blue - darker */
-    --light-dark-bg: #243B55; /* Darker Blue - lighter */
-    --glass-bg: rgba(255, 255, 255, 0.1); /* Translucent white for glassmorphism */
-    --text-color: #E0E0E0; /* Light Gray for general text */
-    --error-color: #FF6B6B; /* Red for error messages */
-    --select-arrow-color: #F7C762; /* Color for the dropdown arrow */
+    --primary-color: #00b7ff; /* Changed from golden yellow to blue */
+    --secondary-color: rgba(0, 160, 255, 0.18); /* Keep or adjust if needed */
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(0,160,255,0.18);
+    --accent-blue: #00b7ff;
+    --text-color: #E0E0E0;
+    --error-color: #FF6B6B;
+    --select-arrow-color: #00b7ff;
 
     /* Border Radii */
     --border-radius-lg: 20px;
@@ -30,7 +30,7 @@
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--dark-bg), var(--light-dark-bg));
+    background: linear-gradient(135deg, #163a5a, #0f6b6a); /* deeper blue-green */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,8 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(36, 59, 85, 0.3) 0%, rgba(20, 30, 48, 0.0) 70%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: 0 15px 40px rgba(2,6,23,0.6);
     transform: rotate(0deg);
     animation: waveRotate 30s linear infinite;
     z-index: 0;
@@ -122,7 +123,7 @@ body::before {
   background: linear-gradient(
     120deg,
     #ffffff 20%,
-    #f7c762 40%,
+    #6271f7 40%,
     #ffffff 60%
   );
   background-size: 200% 100%;
@@ -245,8 +246,8 @@ select:disabled {
     margin-top: 15px; /* Space between last select and primary button */
 }
 .btn-primary:hover {
-    background: #FFD97D; /* Lighter shade on hover */
-    box-shadow: 0 6px 15px rgba(247, 199, 98, 0.4);
+    background: #33c3ff; /* lighter shade of blue */
+    box-shadow: 0 6px 15px rgba(0, 183, 255, 0.4);
 }
 
 .btn-secondary {

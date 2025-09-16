@@ -6,6 +6,7 @@
   <title>Home Remedies & Yoga</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    
     body {
       font-family: 'Inter', sans-serif;
     }
@@ -19,10 +20,10 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-r from-green-100 to-blue-100 min-h-screen p-6">
+ <body class="font-sans bg-gradient-to-br from-[#163a5a] to-[#0f6b6a]  min-h-screen p-6">
 
   <h1 class="text-3xl font-bold text-center mb-6 text-green-800">🌿 Home Remedies & Yoga Guide</h1>
-  <p class="text-center text-gray-700 mb-10">Click on a condition card to see remedies & yoga.</p>
+  <p class="text-center text-gray-900 mb-10">Click on a condition card to see remedies & yoga.</p>
 
   <!-- Grid for illness cards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -174,10 +175,11 @@
   </div>
 
   <script>
+    // toggleExpand(): Finds the .expand element inside the clicked element and toggles its 'show' class to show/hide content
     function toggleExpand(element) {
       const content = element.querySelector('.expand');
       content.classList.toggle('show');
-    }
+    }//ans it when u click
   </script>
 </body>
 </html>

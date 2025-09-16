@@ -11,8 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+      :root{
+      --glass-bg: rgba(255,255,255,0.06);
+      --glass-border: rgba(0,160,255,0.18);
+      --accent-blue: #00b7ff;
+      }
         body {
-            font-family: 'Inter', sans-serif;
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #163a5a, #0f6b6a); /* deeper blue-green */
+        background-attachment: fixed;
+        color: #ffffff;
         }
         .animate-spin {
             animation: spin 1s linear infinite;
